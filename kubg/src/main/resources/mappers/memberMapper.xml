@@ -13,7 +13,7 @@ values(#{userId},#{userPass},#{userName},#{userPhon})
 <!-- 로그인 -->
 <select id="signin" resultType="com.kubg.domain.MemberVO">
  select
-     userId, userName, userPass, userPhon, userAddr1, userAddr2, userAddr3, regiDate
+     userId, userName, userPass, userPhon, userAddr1, userAddr2, userAddr3, regiDate,verify
  from
      tbl_member
  where userId = #{userId}
