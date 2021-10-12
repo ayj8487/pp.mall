@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kubg.domain.CategoryVO;
 import com.kubg.domain.GoodsVO;
@@ -52,4 +53,28 @@ public class AdminController {
 		
 		return "redirect:/admin/index";
 	}
+	//상품 목록 리스트
+	@RequestMapping(value = "/goods/list", method = RequestMethod.GET)
+	public void getGoodsList(Model model) throws Exception{
+		logger.info("get goods list");
+		
+		List<GoodsVO> list = adminService.goodslist();
+		
+		model.addAttribute("list",list);
+	}
+	// 상품 조회
+	@RequestMapping(value = "/goods/view", method = RequestMethod.GET)
+	public void getGoodsview(@RequestParam("n") int gdsNum, Model model) throws Exception {
+	 logger.info("get goods view");
+	 
+	 GoodsVO goods = adminService.goodsView(gdsNum);
+	 
+	 model.addAttribute("goods", goods);
+	}
+	/* 
+	 * 매개변수 @RequestParam("n") int gdsNum 는, URL주소에서 "n"의 값을 찾아서 
+	 * int gdsNum에 전달. 목록에서 링크 주소를 /admin/goods/view?n=[상품번호] 
+	 * 형식으로 했기 떄문에 n를 찾는것이며, 만약 다른 문자로 했다면 그 문자로 해야함
+	 */
+	
 }

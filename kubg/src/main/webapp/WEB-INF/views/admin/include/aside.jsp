@@ -6,7 +6,7 @@
 	<li><a href="/admin/goods/register">상품 등록</a></li>
 
 	<!-- 상품확인 수정/삭제 -->
-	<li><a href="">상품 목록</a></li>
+	<li><a href="/admin/goods/list">상품 목록</a></li>
 
 	<!-- 상품댓글 확인 -->
 	<li><a href="">상품 소감</a></li>

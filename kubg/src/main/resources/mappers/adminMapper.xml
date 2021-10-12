@@ -18,5 +18,19 @@
      values (tbl_goods_seq.nextval, #{gdsName}, #{cateCode}, #{gdsPrice}, #{gdsStock}, #{gdsDes})
 </insert>
 
+<!-- 상품 목록 리스트 --> 
+<select id="goodslist" resultType="com.kubg.domain.GoodsVO">
+ select
+  gdsNum, gdsName, cateCode, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate
+    from tbl_goods
+        order by gdsNum desc
+</select>
+
+<!-- 상품 조회 -->
+<select id="goodsView" resultType="com.kubg.domain.GoodsVO">
+ select gdsNum, gdsName, cateCode, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate
+     from tbl_goods
+         where gdsNum = #{gdsNum}
+</select>
 
 </mapper>

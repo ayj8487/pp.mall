@@ -65,7 +65,7 @@ textarea#gdsDes { width:400px; height:180px; }
 			<%@ include file="../include/aside.jsp" %>
 		</aside>
 		<div id="container_box">
-			<h2>상품등록</h2>
+			<h2>상품 등록</h2>
 			
 	<form role="form" method="post" autocomplete="off">
 

@@ -27,5 +27,18 @@ public class AdminServiceImpl implements AdminService {
 	public void register(GoodsVO vo) throws Exception {
 		dao.register(vo);
 	}
+	
+	//상품목록 리스트
+	@Override
+	public List<GoodsVO> goodslist() throws Exception {
+		System.out.println("서비스");
+		return dao.goodslist();
+	}
+
+	//상품조회
+	@Override
+	public GoodsVO goodsView(int gdsNum) throws Exception {
+		return dao.goodsView(gdsNum);
+	}
 
 }
