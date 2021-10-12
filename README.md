@@ -92,3 +92,7 @@ insert into goods_category(catename, cateCode, cateCodeRef) VALUES ('기타액�
 ## 카테고리 상/하 위 레벨별 분류 
 select level, cateName, cateCode, cateCodeRef from goods_category
 start with cateCodeRef is null connect by prior cateCode = cateCodeRef;
+
+## 상품테이블 데이터 임시 삽입
+insert into tbl_goods (GDSNUM,GDSNAME,CATECODE,GDSPRICE,GDSSTOCK,GDSDES)
+VALUES (tbl_goods_seq.nextval,'상품 이름',100,1000,30,'상품 설명');
