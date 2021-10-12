@@ -88,3 +88,7 @@ insert into goods_category (catename, catecode) VALUES ('패션/액세서리','4
 insert into goods_category(catename, cateCode, cateCodeRef) VALUES ('지갑/벨트/모자','401','400');
 insert into goods_category(catename, cateCode, cateCodeRef) VALUES ('기타액세서리','402','400');
 
+
+## 카테고리 상/하 위 레벨별 분류 
+select level, cateName, cateCode, cateCodeRef from goods_category
+start with cateCodeRef is null connect by prior cateCode = cateCodeRef;
