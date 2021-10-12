@@ -61,3 +61,8 @@ insert into goods_category(catename, cateCode, cateCodeRef) VALUES ('카테고�
 insert into goods_category (catename, catecode) VALUES ('카테고리 3','300'); 
 insert into goods_category(catename, cateCode, cateCodeRef) VALUES ('카테고리 3-1','301','300');
 
+// 
+cateCodeRef의 값이 없다면(null) 그 카테고리는 최상위 카테고리이며, cateCodeRef의 값이 다른 cateCode와 같다면 그 카테고리는 cateCode의 하위 카테고리이다.
+
+cateCodeRef는 cateCode를 참조(foreign)하기 때문에, cateCodeRef는 존재하지 않는 cateCode를 입력할 수 없다.
+
