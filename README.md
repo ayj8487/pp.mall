@@ -61,8 +61,30 @@ insert into goods_category(catename, cateCode, cateCodeRef) VALUES ('카테고�
 insert into goods_category (catename, catecode) VALUES ('카테고리 3','300'); 
 insert into goods_category(catename, cateCode, cateCodeRef) VALUES ('카테고리 3-1','301','300');
 
-// 
-cateCodeRef의 값이 없다면(null) 그 카테고리는 최상위 카테고리이며, cateCodeRef의 값이 다른 cateCode와 같다면 그 카테고리는 cateCode의 하위 카테고리이다.
+// cateCodeRef의 값이 없다면(null) 그 카테고리는 최상위 카테고리이며, cateCodeRef의 값이 다른 cateCode와 같다면 그 카테고리는 cateCode의 하위 카테고리이다.
 
 cateCodeRef는 cateCode를 참조(foreign)하기 때문에, cateCodeRef는 존재하지 않는 cateCode를 입력할 수 없다.
+
+## 카테고리 임시데이터 (본프로젝트)
+insert into goods_category (catename, catecode) VALUES ('여성의류','100'); 
+insert into goods_category(catename, cateCode, cateCodeRef) VALUES ('티셔츠','101','100');
+insert into goods_category(catename, cateCode, cateCodeRef) VALUES ('후드티/후드집업','102','100');
+insert into goods_category(catename, cateCode, cateCodeRef) VALUES ('바지','103','100');
+insert into goods_category(catename, cateCode, cateCodeRef) VALUES ('치마','104','100');
+insert into goods_category(catename, cateCode, cateCodeRef) VALUES ('트레이닝','105','100');
+insert into goods_category(catename, cateCode, cateCodeRef) VALUES ('블라우스','106','100');
+insert into goods_category(catename, cateCode, cateCodeRef) VALUES ('가디건/니트','107','100');
+insert into goods_category(catename, cateCode, cateCodeRef) VALUES ('기타','108','100');
+
+insert into goods_category (catename, catecode) VALUES ('남성의류','200'); 
+insert into goods_category(catename, cateCode, cateCodeRef) VALUES ('티셔츠','201','200');
+insert into goods_category(catename, cateCode, cateCodeRef) VALUES ('바지','202','200');
+
+insert into goods_category (catename, catecode) VALUES ('시게/쥬얼리','300'); 
+insert into goods_category(catename, cateCode, cateCodeRef) VALUES ('시계','301','300');
+insert into goods_category(catename, cateCode, cateCodeRef) VALUES ('쥬얼리','302','300');
+
+insert into goods_category (catename, catecode) VALUES ('패션/액세서리','400'); 
+insert into goods_category(catename, cateCode, cateCodeRef) VALUES ('지갑/벨트/모자','401','400');
+insert into goods_category(catename, cateCode, cateCodeRef) VALUES ('기타액세서리','402','400');
 
