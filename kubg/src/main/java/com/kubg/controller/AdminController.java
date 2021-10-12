@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kubg.domain.CategoryVO;
+import com.kubg.domain.GoodsVO;
 import com.kubg.service.AdminService;
 
 import net.sf.json.JSONArray;
@@ -31,7 +32,7 @@ public class AdminController {
 	logger.info("get index");
 	}
 	
-	// 상품 등록
+	// 상품 등록 (카테고리호출과 등록페이지)
 	@RequestMapping(value = "/goods/register", method = RequestMethod.GET)
 	public void getGoodsRegister(Model model) throws Exception {
 	 logger.info("get goods register");
@@ -44,4 +45,11 @@ public class AdminController {
 	// category에 입력, JSONArray를 이용해 category를 JSON타입으로 변경한 뒤, category라는 명칭으로 모델에 추가함. 
 	// 이 메서드(getGoodsRegister)가 호출 될 때 모델을 jsp에 넘겨서 사용할 수 있다.	
 	
+	//상품 등록
+	@RequestMapping(value = "/goods/register", method = RequestMethod.POST)
+	public String postGoodsRegister(GoodsVO vo) throws Exception{
+		adminService.register(vo);
+		
+		return "redirect:/admin/index";
+	}
 }
