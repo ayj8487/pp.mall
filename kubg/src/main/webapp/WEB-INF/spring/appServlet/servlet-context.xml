@@ -23,6 +23,14 @@
 	
 	<context:component-scan base-package="com.kubg.controller" />
 	
-	
+	<!-- 인터셉터 코드 추가 -->	
+	<beans:bean id="AdminInterceptor" class="com.kubg.interceptor.AdminInterceptor" />
+
+	<interceptors>
+	 <interceptor>
+	  <mapping path="/admin/**" />
+	  <beans:ref bean="AdminInterceptor" />
+	 </interceptor>
+	</interceptors>
 	
 </beans:beans>
