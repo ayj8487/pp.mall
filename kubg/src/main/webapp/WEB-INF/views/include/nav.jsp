@@ -14,7 +14,7 @@
 
 <c:if test="${member != null}">
 
-<c:if test="${member.verify == 0}">
+<c:if test="${member.verify == 9}">
 <li>
  <a href="/admin/index">관리자 화면</a> 
 </li> 
@@ -22,8 +22,6 @@
 	
  <li>
   ${member.userName}님 환영합니다.
-	<br/>    ${member.verify}
-  
  </li>
  <li>
   <a href="/member/signout">로그아웃</a>
