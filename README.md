@@ -47,3 +47,17 @@ alter table tbl_goods add
 
 ## 상품번호 시퀀스
 create sequence tbl_goods_seq;
+
+## 카테고리 테이블 임시 데이터 삽입 
+insert into goods_category (catename, catecode) VALUES ('카테고리 1','100'); 
+insert into goods_category(catename, cateCode, cateCodeRef) VALUES ('카테고리 1-1','101','100');
+insert into goods_category(catename, cateCode, cateCodeRef) VALUES ('카테고리 1-2','102','100');
+
+insert into goods_category (catename, catecode) VALUES ('카테고리 2','200'); 
+insert into goods_category(catename, cateCode, cateCodeRef) VALUES ('카테고리 2-1','201','200');
+insert into goods_category(catename, cateCode, cateCodeRef) VALUES ('카테고리 2-2','202','200');
+insert into goods_category(catename, cateCode, cateCodeRef) VALUES ('카테고리 2-3','203','200');
+
+insert into goods_category (catename, catecode) VALUES ('카테고리 3','300'); 
+insert into goods_category(catename, cateCode, cateCodeRef) VALUES ('카테고리 3-1','301','300');
+
