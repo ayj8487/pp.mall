@@ -96,3 +96,11 @@ start with cateCodeRef is null connect by prior cateCode = cateCodeRef;
 ## 상품테이블 데이터 임시 삽입
 insert into tbl_goods (GDSNUM,GDSNAME,CATECODE,GDSPRICE,GDSSTOCK,GDSDES)
 VALUES (tbl_goods_seq.nextval,'상품 이름',100,1000,30,'상품 설명');
+
+## 상품수정 전 임시조회 쿼리 (카테고리와 같이 가져올수 있도록 JOIN문)
+select 
+g.gdsNum, g.gdsName, g.cateCode, c.cateCodeRef, c.cateName, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate
+from tbl_goods g
+inner join goods_category c
+on g.cateCode = c.cateCode
+where g.gdsnum = 1;
