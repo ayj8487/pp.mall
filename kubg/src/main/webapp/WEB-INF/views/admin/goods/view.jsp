@@ -71,6 +71,8 @@ textarea#gdsDes { width:400px; height:180px; }
 			
 	<form role="form" method="post" autocomplete="off">
 	
+	<input type="hidden" name="n" value="${goods.gdsNum}" />
+	
 	<div class="inputArea"> 
 	 <label>1차 분류</label>
 	 <span class="category1"></span>        
@@ -99,8 +101,29 @@ textarea#gdsDes { width:400px; height:180px; }
 	</div>
 	
 	<div class="inputArea">
-	 <button type="button" id="register_Btn" class="btn btn-warning">수정</button>
-	 <button type="button" id="register_Btn" class="btn btn-danger">삭제</button>
+	 <button type="button" id="modify_Btn" class="btn btn-warning">수정</button>
+	 <button type="button" id="delete_Btn" class="btn btn-danger">삭제</button>
+	
+		<script>
+		  var formObj = $("form[role='form']");
+		  
+		  $("#modify_Btn").click(function(){
+		   formObj.attr("action", "/admin/goods/modify");
+		   formObj.attr("method", "get")
+		   formObj.submit();
+		  });
+		  
+		  $("#delete_Btn").click(function(){
+			  
+			  var con = confirm("정말로 삭제하시겠습니까?");
+			  
+			  if(con) {      
+			   formObj.attr("action", "/admin/goods/delete");
+			   formObj.submit();
+			  }
+			 });
+		 </script>
+	
 	</div>
 	
 	</form>

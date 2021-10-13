@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kubg.domain.CategoryVO;
 import com.kubg.domain.GoodsVO;
+import com.kubg.domain.GoodsViewVO;
 import com.kubg.service.AdminService;
 
 import net.sf.json.JSONArray;
@@ -62,12 +63,12 @@ public class AdminController {
 		
 		model.addAttribute("list",list);
 	}
-	// 상품 조회
+	//상품 조회
 	@RequestMapping(value = "/goods/view", method = RequestMethod.GET)
 	public void getGoodsview(@RequestParam("n") int gdsNum, Model model) throws Exception {
 	 logger.info("get goods view");
 	 
-	 GoodsVO goods = adminService.goodsView(gdsNum);
+	 GoodsViewVO goods = adminService.goodsView(gdsNum);
 	 
 	 model.addAttribute("goods", goods);
 	}
@@ -76,5 +77,37 @@ public class AdminController {
 	 * int gdsNum에 전달. 목록에서 링크 주소를 /admin/goods/view?n=[상품번호] 
 	 * 형식으로 했기 떄문에 n를 찾는것이며, 만약 다른 문자로 했다면 그 문자로 해야함
 	 */
+	
+	//상품 수정 페이지 + 카테고리
+	@RequestMapping(value = "/goods/modify", method = RequestMethod.GET)
+	public void getGoodsModify(@RequestParam("n")int gdsNum, Model model) throws Exception {
+		logger.info("get goods modify");
+		
+		GoodsViewVO goods = adminService.goodsView(gdsNum);
+		model.addAttribute("goods",goods);
+		
+		List<CategoryVO> category = null;
+		category = adminService.category();
+		model.addAttribute("category", JSONArray.fromObject(category));
+	}
+	// 상품 수정
+	@RequestMapping(value = "/goods/modify", method = RequestMethod.POST)
+	public String postGoodsModify(GoodsVO vo) throws Exception {
+		 logger.info("post goods modify");
+	
+		 adminService.goodsModify(vo);
+		 
+		 return "redirect:/admin/index";
+	}
+	// 상품 삭제
+	@RequestMapping(value = "/goods/delete", method = RequestMethod.POST)
+	public String postGoodsDelete(@RequestParam("n") int gdsNum) throws Exception {
+	 logger.info("post goods delete");
+
+	 adminService.goodsDelete(gdsNum);
+	 
+	 return "redirect:/admin/index";
+	}
+	
 	
 }
