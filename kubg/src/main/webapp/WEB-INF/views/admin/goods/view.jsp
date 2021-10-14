@@ -36,6 +36,9 @@ label { display:inline-block; width:70px; padding:5px; }
 label[for='gdsDes'] { display:block; }
 input { width:150px; }
 textarea#gdsDes { width:400px; height:180px; }
+
+.oriImg{width: 500px; height: auto;}
+.thumbImg{}
 </style>
 
 <!-- 제이쿼리-->
@@ -98,6 +101,15 @@ textarea#gdsDes { width:400px; height:180px; }
 	<div class="inputArea">
 	 <label for="gdsDes">상품소개</label>
 	 <span>${goods.gdsDes}</span>
+	</div>
+	
+	<div class="inputArea">
+	 <label for="gdsImg">이미지</label>
+	 <p>원본 이미지</p>
+	 <img src="${goods.gdsImg}" class="oriImg"/>
+	 
+	 <p>썸네일</p>
+	 <img src="${goods.gdsThumbImg}" class="thumbImg"/>
 	</div>
 	
 	<div class="inputArea">

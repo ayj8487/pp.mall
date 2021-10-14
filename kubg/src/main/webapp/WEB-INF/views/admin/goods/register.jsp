@@ -34,6 +34,9 @@ label { display:inline-block; width:70px; padding:5px; }
 label[for='gdsDes'] { display:block; }
 input { width:150px; }
 textarea#gdsDes { width:400px; height:180px; }
+
+.select_img img {margin: 20px 0;}
+
 </style>
 
 <!-- 제이쿼리-->
@@ -67,7 +70,7 @@ textarea#gdsDes { width:400px; height:180px; }
 		<div id="container_box">
 			<h2>상품 등록</h2>
 			
-	<form role="form" method="post" autocomplete="off">
+	<form role="form" method="post" autocomplete="off" enctype="multipart/form-data">
 
 	<div class="inputArea"> 
 	 <label>1차 분류</label>
@@ -100,6 +103,28 @@ textarea#gdsDes { width:400px; height:180px; }
 	 <label for="gdsDes">상품소개</label>
 	 <textarea rows="5" cols="50" id="gdsDes" name="gdsDes"></textarea>
 	</div>
+	
+	<div class="inputArea">
+		 <label for="gdsImg">이미지</label>
+		 <input type="file" id="gdsImg" name="file" />
+		 <div class="select_img"><img  src="" /></div>
+		 
+		 <!-- 파일 선택시 어떤이미지인지 미리 보여주는 스크립트 -->
+		 <script>
+		  $("#gdsImg").change(function(){
+		   if(this.files && this.files[0]) {
+		    var reader = new FileReader;
+		    reader.onload = function(data) {
+		     $(".select_img img").attr("src", data.target.result).width(500);        
+		    }
+		    reader.readAsDataURL(this.files[0]);
+		   }
+		  });
+		 </script>
+		 <!-- 현재 프로젝트의 실제경로를 표시, 경로를기준으로 파일을 저장하고 불러옴-->
+		<%=request.getRealPath("/") %>
+	</div>
+	
 	
 	<div class="inputArea">
 	 <button type="submit" id="register_Btn" class="btn btn-primary">등록</button>

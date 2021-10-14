@@ -24,26 +24,49 @@
 	
 	<dependencies>
 	
+	<!-- @Resource 임포트하기위해 추가 -->
+	<dependency>
+    <groupId>javax.annotation</groupId>
+    <artifactId>javax.annotation-api</artifactId>
+    <version>1.3.2</version>
+	</dependency>
+
+	
+	<!-- 파일 업로드 -->	
+	<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+	<dependency>
+	    <groupId>commons-fileupload</groupId>
+	    <artifactId>commons-fileupload</artifactId>
+	    <version>1.3.3</version>
+	</dependency>
+	
+	<!-- 썸네일(이미지) 업로드 -->
+	<!-- https://mvnrepository.com/artifact/net.coobird/thumbnailator -->
+	<dependency>
+	    <groupId>net.coobird</groupId>
+	    <artifactId>thumbnailator</artifactId>
+	    <version>0.4.8</version>
+	</dependency>
+	
 	<!-- 스프링 세큐리티 암호화 -->
+	
 	<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
 	<dependency>
-	    <groupId>org.springframework.security</groupId>
-	    <artifactId>spring-security-core</artifactId>
-	    <version>5.0.8.RELEASE</version>
+	    <groupId>org.springframework.security</groupId>
+	    <artifactId>spring-security-core</artifactId>
+	    <version>5.0.8.RELEASE</version>
 	</dependency>
-	
 	<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
 	<dependency>
-	    <groupId>org.springframework.security</groupId>
-	    <artifactId>spring-security-web</artifactId>
-	    <version>5.0.8.RELEASE</version>
+	    <groupId>org.springframework.security</groupId>
+	    <artifactId>spring-security-web</artifactId>
+	    <version>5.0.8.RELEASE</version>
 	</dependency>
-	
 	<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-config -->
 	<dependency>
-	    <groupId>org.springframework.security</groupId>
-	    <artifactId>spring-security-config</artifactId>
-	    <version>5.0.8.RELEASE</version>
+	    <groupId>org.springframework.security</groupId>
+	    <artifactId>spring-security-config</artifactId>
+	    <version>5.0.8.RELEASE</version>
 	</dependency>
 
 		<!-- Spring -->
