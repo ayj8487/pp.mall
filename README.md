@@ -104,3 +104,6 @@ from tbl_goods g
 inner join goods_category c
 on g.cateCode = c.cateCode
 where g.gdsnum = 1;
+
+## tbl_goods 테이블 썸네일 컬럼 추가 (이미지저장시)
+alter table tbl_goods add (gdsThumbImg varchar(200));
