@@ -31,7 +31,7 @@ public class AdminServiceImpl implements AdminService {
 	
 	//상품목록 리스트
 	@Override
-	public List<GoodsVO> goodslist() throws Exception {
+	public List<GoodsViewVO> goodslist() throws Exception {
 		System.out.println("서비스");
 		return dao.goodslist();
 	}

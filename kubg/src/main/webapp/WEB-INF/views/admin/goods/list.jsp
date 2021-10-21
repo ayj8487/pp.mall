@@ -40,8 +40,14 @@ textarea#gdsDes { width:400px; height:180px; }
 </style>
 
 <style>
-#container_box table td { width:150px; }
+#container_box table {width: 900px;}
+#container_box table th {font-size: 20px; font-weight: bold; text-align: center; padding: 10px; border-bottom: 2px solid #666; }
+
+#container_box table tr:hover{ background: #eee; }
+#container_box table td {padding: 10px; text-align: center;}
+#container_box table img{ width: 150px; height: auto;}
 </style>
+
 
 <!-- 제이쿼리-->
 <script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
@@ -72,12 +78,11 @@ textarea#gdsDes { width:400px; height:180px; }
 			<%@ include file="../include/aside.jsp" %>
 		</aside>
 		<div id="container_box">
-			<h2>상품 목록</h2>
 			
 			<table>
 			 <thead>
 			  <tr>
-			   <th>번호</th>
+			   <th>썸네일</th>
 			   <th>이름</th>
 			   <th>카테고리</th>
 			   <th>가격</th>
@@ -87,22 +92,29 @@ textarea#gdsDes { width:400px; height:180px; }
 			 </thead>
 			 
 			 <tbody>
-			  <c:forEach items="${list}" var="list">
-			  <tr>
-			   <td>${list.gdsNum}</td>
-			   <td>
-				<a href="/admin/goods/view?n=${list.gdsNum}">${list.gdsName}</a>
-			   </td>
-			   <td>${list.cateCode}</td>
-			   <td>
-			   <fmt:formatNumber value="${list.gdsPrice}" pattern="###,###,###" />
-			   </td>
-			   <td>${list.gdsStock}</td>
-			   <td>
-			   <fmt:formatDate value="${list.gdsDate}" pattern="yyyy-MM-dd" />
-			   </td>
-			  </tr>   
-			  </c:forEach>
+			 <c:forEach items="${list}" var="list">
+				<tr>
+				 <td>
+				  <a href="/admin/goods/view?n=${list.gdsNum}">
+				  <img src="${list.gdsThumbImg}">
+				  </a>
+				 </td>
+				 <td>
+				  <a href="/admin/goods/view?n=${list.gdsNum}">${list.gdsName}</a>
+				 </td>
+				 <td>
+				  <!-- ${list.cateCode} -->
+				  ${list.cateName}
+				 </td>
+				 <td>
+				  <fmt:formatNumber value="${list.gdsPrice}"  pattern="###,###,###"/>
+				 </td>
+				 <td>${list.gdsStock}</td>
+				 <td>
+				  <fmt:formatDate value="${list.gdsDate}" pattern="yyyy-MM-dd" />
+				 </td>
+				</tr>   
+				</c:forEach>
 			 </tbody>
 			</table>
 	

@@ -108,7 +108,7 @@ textarea#gdsDes { width:400px; height:180px; }
 	 <label for="gdsDes">상품소개</label>
 	 <textarea rows="5" cols="50" id="gdsDes" name="gdsDes"></textarea>
 
-<!-- 이지웍 에디터  -->
+	<!-- 이지윅 에디터 불러오기-->
 	<script>
 	 var ckeditor_config = {
 	   resize_enaleb : false,
@@ -250,6 +250,30 @@ $(document).on("change", "select.category1", function(){
 
 
 </script>
+
+<!-- 상품가격과 수량입력시 숫자만입력 할수 있도록 유효성 검사 -->
+<script>
+
+// 정규식 표현중 하나로 숫자만 허용하게함
+// 인풋박스 문자 입력시 곧바로 지워지고 숫자만 유지 
+var regExp = /[^0-9]/gi;
+
+$("#gdsPrice").keyup(function(){ numCheck($(this)); });
+$("#gdsStock").keyup(function(){ numCheck($(this)); });
+
+function numCheck(selector) {
+ var tempVal = selector.val();
+ selector.val(tempVal.replace(regExp, ""));
+}
+</script>
+<!-- 
+	상품 가격(gdsPrice)와 상품 수량(gdsStock)을 입력할 때마다 numCheck() 함수를 호출하며, 
+	이때 현재 선택자 $(this) 같이 보냄, $(this) 는 현재 실행중인 선택자로, 
+	상품 가격에 입력할 때 $(this)는 $("#gdsPrice") 를 의미하고, 
+	상품 수량을 입력할 땐 $("#gdsStock") 이 된다.
+	numCheck()함수는 현재 선택된 선택자를 selector에 저장한 뒤, 
+	selector에 입력된 값을 정규표현식 맞게 변경합니다. 
+-->
 
 </body>
 </html>
