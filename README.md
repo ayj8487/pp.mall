@@ -107,3 +107,7 @@ where g.gdsnum = 1;
 
 ## tbl_goods 테이블 썸네일 컬럼 추가 (이미지저장시)
 alter table tbl_goods add (gdsThumbImg varchar(200));
+
+## 이지웍 에디터 ck에디터 다운로드 링크(현 프로젝트 버전4)
+https://ckeditor.com/ckeditor-4/download/?null-addons=
+
