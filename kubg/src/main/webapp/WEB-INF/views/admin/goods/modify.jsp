@@ -48,6 +48,9 @@ textarea#gdsDes { width:400px; height:180px; }
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
+<!-- CK에디터 -->
+<script src="/resources/ckeditor/ckeditor.js"></script>
+
 </head>
 <body>
 <div id="root">
@@ -99,6 +102,18 @@ textarea#gdsDes { width:400px; height:180px; }
 		<div class="inputArea">
 		 <label for="gdsDes">상품소개</label>
 		 <textarea rows="5" cols="50" id="gdsDes" name="gdsDes">${goods.gdsDes}</textarea>
+		
+		<script>
+		 var ckeditor_config = {
+		   resize_enaleb : false,
+		   enterMode : CKEDITOR.ENTER_BR,
+		   shiftEnterMode : CKEDITOR.ENTER_P,
+		   filebrowserUploadUrl : "/admin/goods/ckUpload"
+		 };
+		 
+		 CKEDITOR.replace("gdsDes", ckeditor_config);
+		</script>
+
 		</div>
 		
 		<div class="inputArea">

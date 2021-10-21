@@ -2,6 +2,20 @@
 <html>
 <head>
 	<title>Admin</title>
+	
+	
+<!-- 제이쿼리-->
+<script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- 부트스트랩 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+<!-- 이지윅 에디터 -->
+<script src="/resources/ckeditor/ckeditor.js"></script>
+	
 <style>
  body { font-family:'맑은 고딕', verdana; padding:0; margin:0; }
  ul { padding:0; margin:0; list-style:none;  }
@@ -38,15 +52,6 @@ textarea#gdsDes { width:400px; height:180px; }
 .select_img img {margin: 20px 0;}
 
 </style>
-
-<!-- 제이쿼리-->
-<script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-<!-- 부트스트랩 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 </head>
 <body>
@@ -102,6 +107,19 @@ textarea#gdsDes { width:400px; height:180px; }
 	<div class="inputArea">
 	 <label for="gdsDes">상품소개</label>
 	 <textarea rows="5" cols="50" id="gdsDes" name="gdsDes"></textarea>
+
+<!-- 이지웍 에디터  -->
+	<script>
+	 var ckeditor_config = {
+	   resize_enaleb : false,
+	   enterMode : CKEDITOR.ENTER_BR,
+	   shiftEnterMode : CKEDITOR.ENTER_P,
+	   filebrowserUploadUrl : "/admin/goods/ckUpload"
+	 };
+	 
+	 CKEDITOR.replace("gdsDes", ckeditor_config);
+	</script>
+
 	</div>
 	
 	<div class="inputArea">

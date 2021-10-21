@@ -39,6 +39,9 @@ textarea#gdsDes { width:400px; height:180px; }
 
 .oriImg{width: 500px; height: auto;}
 .thumbImg{}
+
+/* ck에디터의 기본 이미지 크기로 인해 편집시 소스보기를 통해 스타일 태그 제거 후 이용 */
+.gdsDes img { max-width:600px; height:auto; }
 </style>
 
 <!-- 제이쿼리-->
@@ -100,7 +103,11 @@ textarea#gdsDes { width:400px; height:180px; }
 	
 	<div class="inputArea">
 	 <label for="gdsDes">상품소개</label>
-	 <span>${goods.gdsDes}</span>
+
+<!--   <span>${goods.gdsDes}</span> -->	 
+
+	<div class="gdsDes">${goods.gdsDes}</div>
+	
 	</div>
 	
 	<div class="inputArea">
