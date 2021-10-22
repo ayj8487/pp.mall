@@ -111,3 +111,12 @@ alter table tbl_goods add (gdsThumbImg varchar(200));
 ## 이지윅 에디터 ck에디터 다운로드 링크(현 프로젝트 버전4)
 https://ckeditor.com/ckeditor-4/download/?null-addons=
 
+## 사용자 화면 카테고리 출력 임시 테스트
+select 
+g.gdsnum,g.gdsname,g.catecode,c.catecoderef,c.catename,
+gdsprice,gdsstock,gdsdes,gdsimg,gdsdate,g.gdsimg,g.gdsthumbimg
+from tbl_goods g
+inner join goods_category c
+on g.catecode = c.catecode
+where g.catecode = 101;
+
