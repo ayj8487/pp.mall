@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kubg.mappers.shopMapper">
+
+<!-- 
+무기 카테고리는 1차 분류와 2차 분류가 동시에 있기 때문에, 
+처음 사용한 쿼리만으로는 모두 출력할 수 없다. 
+예를들어 위 화면의 '여성의류' 카테고리 코드(cateCode)는 101번이며, 
+'티셔츠' 카테고리의 하위 이므로 카테고리 참조 코드(cateCodeRef)는 100이다.
+
+그러므로 조건을 '카테고리 코드(cateCode)가 100이거나 카테고리 참조 코드(cateCodeRef)가 100이면'으로 바꾸게되면 모두 출력할 수 있다.
+
+ -->
+   
+<!-- 카테고리별 상품 리스트 : 1차 분류 -->
+<select id="list_1" resultType="com.kubg.domain.GoodsViewVO">
+select
+    g.gdsNum, g.gdsName, g.cateCode, c.cateCodeRef, c.cateName,
+    gdsPrice, gdsStock, gdsDes, gdsDate, g.gdsImg, g.gdsThumbImg
+        from tbl_goods g
+            inner join goods_category c
+                on g.cateCode = c.cateCode           
+            where g.cateCode = #{cateCode}
+             or c.cateCodeRef = #{cateCodeRef}
+</select>
+
+<!-- 카테고리별 상품 리스트 : 2차 분류 -->
+<select id="list_2" resultType="com.kubg.domain.GoodsViewVO">
+select
+    g.gdsNum, g.gdsName, g.cateCode, c.cateCodeRef, c.cateName,
+    gdsPrice, gdsStock, gdsDes, gdsDate, g.gdsImg, g.gdsThumbImg
+        from tbl_goods g
+            inner join goods_category c
+                on g.cateCode = c.cateCode           
+            where g.cateCode = #{cateCode}
+</select>
+
+</mapper>
