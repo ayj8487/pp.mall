@@ -23,6 +23,20 @@
     </repositories>
 	
 	<dependencies>
+
+	<!-- 에이젝스1 (Ajax)  -->
+	<dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-databind</artifactId>
+    <version>2.9.6</version>
+	</dependency>
+
+	<!-- 에이젝스2 (Ajax)  -->
+	<dependency>
+	    <groupId>org.codehaus.jackson</groupId>
+	    <artifactId>jackson-mapper-asl</artifactId>
+	    <version>1.9.13</version>
+	</dependency>
 	
 	<!-- @Resource 임포트하기위해 추가 -->
 	<dependency>
@@ -172,7 +186,7 @@
 			<scope>test</scope>
 		</dependency>      -->   
 		
-		<!-- 새로추가 -->
+		<!-- 셋팅시 새로추가 -->
 		
 		<!-- JSON 라이브러리 -->
 		<dependency>

@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kubg.domain.GoodsViewVO;
 import com.kubg.domain.MemberVO;
@@ -48,24 +49,46 @@ public class ShopController {
 	 GoodsViewVO view = service.goodsView(gdsNum);
 	 model.addAttribute("view", view);
 	 
-	 // 댓글조회 추가 후 밑의 코드 추가 
-	 List<ReplyListVO> reply = service.replyList(gdsNum);
-	 model.addAttribute("reply", reply);
+	 // 1. 댓글조회 추가 후 밑의 코드 추가 , 2. Ajax사용시 주석
+//	 List<ReplyListVO> reply = service.replyList(gdsNum);
+//	 model.addAttribute("reply", reply);
 	}
 	
-	// 상품조회 - 소감(댓글) 작성
+	// 상품조회 - 소감(댓글) 작성 -- Ajax 미사용시 
 	// HttpSession 을 이용해 member세션에 저장되어있는 유저 아이디를 가져옴
-	@RequestMapping(value = "/view", method = RequestMethod.POST)
-	public String registReply(ReplyVO reply, HttpSession session) throws Exception{
+//	@RequestMapping(value = "/view", method = RequestMethod.POST)
+//	public String registReply(ReplyVO reply, HttpSession session) throws Exception{
+//	 logger.info("regist reply");
+//		 
+//	 MemberVO member = (MemberVO)session.getAttribute("member");
+//	 reply.setUserId(member.getUserId());
+//	 
+//	 service.registReply(reply);
+//		
+//	 return "redirect:/shop/view?n=" + reply.getGdsNum();
+//	}
+	
+	// 상품조회 - 소감(댓글) 목록(리스트)  -- Ajax사용시 
+	@ResponseBody
+	@RequestMapping(value = "/view/replyList", method = RequestMethod.GET)
+	public List<ReplyListVO> getReplyList(@RequestParam("n") int gdsNum) throws Exception {
+	 logger.info("get reply list");
+	   
+	 List<ReplyListVO> reply = service.replyList(gdsNum);
+	 
+	 return reply;
+	} 
+	// 상품 소감(댓글) 작성 -- Ajax사용시
+	@ResponseBody
+	@RequestMapping(value = "/view/registReply", method = RequestMethod.POST)
+	public void registReply(ReplyVO reply,  HttpSession session) throws Exception {
 	 logger.info("regist reply");
-		 
+	 
 	 MemberVO member = (MemberVO)session.getAttribute("member");
 	 reply.setUserId(member.getUserId());
 	 
 	 service.registReply(reply);
-		
-	 return "redirect:/shop/view?n=" + reply.getGdsNum();
-	}
+	} 
 	
 	
 	

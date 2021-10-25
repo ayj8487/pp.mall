@@ -6,11 +6,11 @@
 <html>
 <head>
 	<title>Home</title>
+<link rel="shortcut icon" href="#">
 
 <!-- 제이쿼리-->
 <script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
 	
 <style>
  body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
@@ -94,6 +94,44 @@ aside#aside li > ul.low li { width:180px; }
  section.replyList div.userInfo .date { color:#999; display:inline-block; margin-left:10px; }
  section.replyList div.replyContent { padding:10px; margin:20px 0; }
 </style>
+
+<!--  상품 댓글목록(리스트) ajax활성 --> 
+  <script> 
+  function replyList() {
+	
+	  var gdsNum = ${view.gdsNum};
+	  $.getJSON("/shop/view/replyList" + "?n=" + gdsNum, function(data){
+	   var str = "";
+	   
+	   $(data).each(function(){
+	    
+	    console.log(data);
+	    
+	    var repDate = new Date(this.repDate);
+	    repDate = repDate.toLocaleDateString("ko-US")
+	    
+	    str += "<li data-gdsNum='" + this.gdsNum + "'>"
+	      + "<div class='userInfo'>"
+	      + "<span class='userName'>" + this.userName + "</span>"
+	      + "<span class='date'>" + repDate + "</span>"
+	      + "</div>"
+	      + "<div class='replyContent'>" + this.repCon + "</div>"
+	      + "</li>";           
+	   });
+	   
+	   $("section.replyList ol").html(str);
+	  });
+  } 
+  
+	</script>
+ <!-- 
+	getJson() 은 비동기식으로 제이슨(Json) 데이터를 가져오는 메서드
+	1. http:///shop/view/replyList" + "?n=" + gdsNum 주소로 컨트롤러에 접속하여 데이터를 가져오고, 
+	2. 그 데이터를 이용해 HTML코드를 조립하여 <ol> 태그에 추가하는 방식이며,
+	3. 테이블에 저장된 날짜 데이터와 컨트롤러에서 뷰로 보낼때의 날짜 데이터 형식이 다르기 때문에, 컨트롤러에서 toLocaleDateString() 를 이용해 1차적으로 데이터를 가공함.
+	4. function replyList() 재사용을 위해 함수로 묶고 script를 head로 옮김			   
+  -->	
+
 	
 </head>
 <body>
@@ -193,22 +231,65 @@ aside#aside li > ul.low li { width:180px; }
 				 <section class="replyForm">
 				  <form role="form" method="post" autocomplete="off">
 				   
-				   <input type ="hidden" name="gdsNum" value="${view.gdsNum}">
+				   <input type ="hidden" name="gdsNum" id="gdsNum" value="${view.gdsNum}">
 				   
 				   <div class="input_area">
 				    <textarea name="repCon" id="repCon"></textarea>
 				   </div>
 				   
 				   <div class="input_area">
-				    <button type="submit" id="reply_btn">후기 남기기</button>
+				    <button type="button" id="reply_btn">후기 남기기</button>
+				   
+				<script>
+					 $("#reply_btn").click(function(){
+					  
+					  var formObj = $(".replyForm form[role='form']");
+					  var gdsNum = $("#gdsNum").val();
+					  var repCon = $("#repCon").val()
+					  
+					  var data = {
+					    gdsNum : gdsNum,
+					    repCon : repCon
+					    };
+					  
+					  $.ajax({
+					   url : "/shop/view/registReply",
+					   type : "post",
+					   data : data,
+					   success : function(){
+						   replyList();
+					    $("#repCon").val("");
+					   }
+					  });
+					 });
+				</script>
+
 				   </div>
 				   
 				  </form>
 				 </section>
 				 </c:if>
+			   <!--  Ajax로 댓글작성
+		  1. gdsNum,repCon 변수를 선언, 인풋박스와 텍스트에어리어의 값을 저장하며 제이슨형의 변수 data를 생성  
+		  2. 변수 data 즉 제이슨형태는 (키:키값, 키:키값, 키:키값, 키:키값 ...)형태로 되어있다
+		  3. 그러므로 ( gdsNum : gdsNum, repCon : repCon ) 는 글씨는 똑같지만 앞에있는것이 키, 뒤에있는것이 값임
+		   
+		   이후 에이젝스를 이용하는데, 여기서 사용한 에이젝스는 url, type, data, success로 구성되어있다. 
+		   url은 데이터가 전송될 주소, 
+		   type는 타입(get, post), 
+		   data는 전송될 데이터, 
+		   success는 데이터 전송이 성공되었을 경우 실행할 함수부이다.
+
+			이외에도 데이터 전송이 실패할 경우 실행되는 error, 
+			성공 여부 상관없이 실행되는 complete등이 있다.
+
+			success에서는 위에서 작성한 replyList() 함수를 호출하여, 
+			소감(댓글)이 작성 완료되면 소감 목록을 다시 읽어서 출력한다.
+		   -->
 				 
 					<section class="replyList">
 					 <ol>
+					<!-- ajax 사용을 위해 주석, replyList()로 대체 후 head로 올림
 					 <c:forEach items="${reply}" var="reply">
 					
 					  <li>
@@ -219,7 +300,13 @@ aside#aside li > ul.low li { width:180px; }
 					      <div class="replyContent">${reply.repCon}</div>
 					    </li>
 					   </c:forEach>
+					 -->			   
 					  </ol>    
+					  
+					<script>
+					replyList();
+					</script>
+					
 					</section>
 
 				</div>
