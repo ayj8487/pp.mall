@@ -11,4 +11,8 @@ public interface ShopDAO {
 
 	//카테고리별 상품 리스트 : 2차분류
 	public List<GoodsViewVO> list(int cateCode) throws Exception;
+
+	//상품조회
+	public GoodsViewVO goodsView(int gdsNum) throws Exception;
+
 }
