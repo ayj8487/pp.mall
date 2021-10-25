@@ -154,3 +154,9 @@ alter table tbl_reply
     add constraint tbl_reply_userId foreign key(userId)
     references tbl_member(userId);
 
+## 댓글 임시데이터 삽입
+-- 현재의 상품번호(gdsNum)hidden, 로그인한 세션값, 상품번호자동 시퀀스,textarea 내용 값
+
+insert into tbl_reply (gdsNum ,userId, repNum, repCon)
+values (1,'pma8487@nate.com',TBL_REPLY_SEQ.nextval, '나이키 짱');
+
