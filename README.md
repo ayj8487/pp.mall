@@ -120,3 +120,51 @@ inner join goods_category c
 on g.catecode = c.catecode
 where g.catecode = 101;
 
+## 댓글(상품후기및 소감) 테이블 생성
+---댓글(상품후기) 테이블 생성
+
+-- 상품 소감 테이블(tbl_reply)의 기본키는 상품 번호(gdsNum)과 소감 번호(repNum)
+-- 상품 번호는 소감이 어느 상품에 작성되었는지 구분하며, 소감 번호는 한 상품에 작성된 소감을 구분할 수 있다.
+
+create table tbl_reply (
+    gdsNum      number          not null,
+    userId      varchar2(50)    not null,
+    repNum      number          not null,
+    repCon      varchar2(2000)  not null,
+    repDate     date            default sysdate,
+    primary key(gdsNum, repNum) 
+);
+
+## 상품번호(repNum) 자동생성 시퀀스
+create sequence tbl_reply_seq;
+
+## 상품테이블 참조 쿼리
+-- 소감 테이블의 상품 번호와 유저 아이디는 다른 테이블에서 참조하며 테이블을 참조하게되면 
+-- 참조하는 테이블에 값이 없는 경우 추가되지 않도록 막을 수 있다.
+
+-- 이렇게 참조키를 사용하는 이유는, 데이터의 무결성을 위해서이며, 
+-- 어떠한 이유가 생겨서 존재하지 않는 상품 번호나 유저 아이디가 데이터 베이스에 전달 될 경우, 
+-- 참조키가 있다면 데이터가 입력되는걸 차단할수있다
+
+alter table tbl_reply
+    add constraint tbl_reply_gdsNum foreign key(gdsNum)
+    references tbl_goods(gdsNum);
+   
+alter table tbl_reply
+    add constraint tbl_reply_userId foreign key(userId)
+    references tbl_member(userId);
+
+## 댓글 임시데이터 삽입
+-- 현재의 상품번호(gdsNum)hidden, 로그인한 세션값, 상품번호자동 시퀀스,textarea 내용 값
+
+insert into tbl_reply (gdsNum ,userId, repNum, repCon)
+values (1,'pma8487@nate.com',TBL_REPLY_SEQ.nextval, '나이키 짱');
+
+## 상품댓글 정보와 유저의 닉네임을 같이 가져오기 위해 조인사용 테스트
+select 
+r.gdsNum, r.userId, r.repNum, r.repCon,r.repDate,
+m.userName
+from tbl_reply r
+    inner join tbl_member m
+    on r.userId = m.userid
+ where gdsNum =1;
