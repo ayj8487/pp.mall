@@ -9,6 +9,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.kubg.domain.GoodsViewVO;
+import com.kubg.domain.ReplyListVO;
+import com.kubg.domain.ReplyVO;
 
 @Repository
 public class ShopDAOImpl implements ShopDAO {
@@ -50,6 +52,18 @@ public class ShopDAOImpl implements ShopDAO {
 	public GoodsViewVO goodsView(int gdsNum) throws Exception {
 		return sql.selectOne("com.kubg.mappers.adminMapper" + ".goodsView", gdsNum);
 		// 기존 관리자모드 상품조회매퍼를 그대로 쓸것이기 때문에 namespace가 아닌 매퍼의 경로를 입력
+	}
+
+	//상품소감(댓글) 작성
+	@Override
+	public void registReply(ReplyVO reply) throws Exception {
+		sql.insert(namespace +".registReply", reply);
+	}
+
+	//상품소감(댓글) 조회 리스트
+	@Override
+	public List<ReplyListVO> replyList(int gdsNum) throws Exception {
+		return sql.selectList(namespace + ".replyList", gdsNum);
 	}
 
 

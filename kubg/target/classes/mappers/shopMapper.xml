@@ -37,4 +37,20 @@ select
             where g.cateCode = #{cateCode}
 </select>
 
+<!-- 상품 소감(댓글) 작성 -->
+<insert id="registReply">
+ insert into tbl_reply (gdsNum, userId, repNum, repCon)
+     values (#{gdsNum}, #{userId}, tbl_reply_seq.nextval, #{repCon})
+</insert>
+
+<!-- 상품 소감(댓글) 리스트 -->
+<select id="replyList" resultType="com.kubg.domain.ReplyListVO">
+ select
+     r.gdsNum, r.userId, r.repNum, r.repCon, r.repDate, m.userName
+ from tbl_reply r
+     inner join tbl_member m
+         on r.userId = m.userId
+     where gdsNum = #{gdsNum}
+</select>
+
 </mapper>

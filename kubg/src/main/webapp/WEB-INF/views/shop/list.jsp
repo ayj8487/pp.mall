@@ -92,7 +92,9 @@ aside#aside li > ul.low li { width:180px; }
 				 <c:forEach items="${list}" var="list">
 				 <li>
 				  <div class="goodsThumb">
-				   <img src="${list.gdsThumbImg}">
+				   <a href="/shop/view?n=${list.gdsNum}">
+	   				   <img src="${list.gdsThumbImg}">
+				   </a>
 				  </div> 
 				  <div class="goodsName">
 				   <a href="/shop/view?n=${list.gdsNum}">${list.gdsName}</a>

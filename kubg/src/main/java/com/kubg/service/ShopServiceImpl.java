@@ -7,6 +7,8 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.kubg.domain.GoodsViewVO;
+import com.kubg.domain.ReplyListVO;
+import com.kubg.domain.ReplyVO;
 import com.kubg.persistence.ShopDAO;
 
 @Service
@@ -38,6 +40,18 @@ public class ShopServiceImpl implements ShopService {
 	@Override
 	public GoodsViewVO goodsView(int gdsNum) throws Exception {
 		return dao.goodsView(gdsNum);
+	}
+
+	//상품소감(댓글) 작성
+	@Override
+	public void registReply(ReplyVO reply) throws Exception {
+		dao.registReply(reply);
+	}
+
+	//상품소감(댓글) 조회 리스트
+	@Override
+	public List<ReplyListVO> replyList(int gdsNum) throws Exception {
+		return dao.replyList(gdsNum);
 	}
 }
 
