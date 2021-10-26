@@ -53,4 +53,18 @@ select
      where gdsNum = #{gdsNum}
 </select>
 
+<!-- 상품 소감(댓글) 삭제 -->
+<delete id="deleteReply">
+ delete tbl_reply
+     where repNum = #{repNum}
+         and userId = #{userId}
+</delete>
+
+<!-- 댓글 수정,삭제시 아이디 체크 -->
+<select id="replyUserIdCheck" resultType="String">
+ select userId
+  from tbl_reply
+      where repNum = #{repNum}
+</select>
+
 </mapper>

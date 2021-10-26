@@ -93,6 +93,8 @@ aside#aside li > ul.low li { width:180px; }
  section.replyList div.userInfo .userName { font-size:24px; font-weight:bold; }
  section.replyList div.userInfo .date { color:#999; display:inline-block; margin-left:10px; }
  section.replyList div.replyContent { padding:10px; margin:20px 0; }
+
+section.replyList div.replyFooter button { font-size:14px; border: 1px solid #999; background:none; margin-right:10px; }
 </style>
 
 <!--  상품 댓글목록(리스트) ajax활성 --> 
@@ -116,6 +118,12 @@ aside#aside li > ul.low li { width:180px; }
 	      + "<span class='date'>" + repDate + "</span>"
 	      + "</div>"
 	      + "<div class='replyContent'>" + this.repCon + "</div>"
+	      
+	      + "<div class='replyFooter'>"
+	      + "<button type='button' class='modify' data-repNum='" + this.repNum + "'>수정</button>"
+	      + "<button type='button' class='delete' data-repNum='" + this.repNum + "'>삭제</button>"
+	      + "</div>"
+	      
 	      + "</li>";           
 	   });
 	   
@@ -185,6 +193,7 @@ aside#aside li > ul.low li { width:180px; }
 				 <input type="number" class="numBox" min="1" max="${view.gdsStock}" value="1" readonly="readonly"/>
 				 <button type="button" class="minus">-</button>
 				 
+				 <!-- 수량 버튼 -->
 				 <script>
 				  $(".plus").click(function(){
 				   var num = $(".numBox").val();
@@ -240,6 +249,7 @@ aside#aside li > ul.low li { width:180px; }
 				   <div class="input_area">
 				    <button type="button" id="reply_btn">후기 남기기</button>
 				   
+				   <!-- 댓글작성 -->
 				<script>
 					 $("#reply_btn").click(function(){
 					  
@@ -305,6 +315,43 @@ aside#aside li > ul.low li { width:180px; }
 					  
 					<script>
 					replyList();
+					</script>
+					
+					<!-- 댓글 삭제 -->
+					
+					<!-- 
+					컨트롤러부터 받아온 result의 값이 1이라면 삭제 작업이 진행되었으니 소감 목록을 다시 불러오고, 
+					1이 아니라면 삭제 작업이 진행되지 않은것이며, 
+					그렇다는건 로그인한 사용자와 소감을 작성한 사용자가 다른것이므로 메시지를 띄움.
+					 -->
+					<script>
+					 $(document).on("click", ".delete", function(){
+					  
+						 var deletConfirm = confirm("댓글을 삭제하시겠습니까?");
+						 
+						 if(deletConfirm) {
+						 
+					  var data = {repNum : $(this).attr("data-repNum")};
+					   
+					  $.ajax({
+					   url : "/shop/view/deleteReply",
+					   type : "post",
+					   data : data,
+					   success : function(result){
+						   
+						   if(result == 1) {
+						    replyList();
+						   } else {
+						    alert("작성자가 아닙니다.");     
+						   }
+						  },
+						  error : function(){
+							  alert("로그인후 이용 바랍니다.")
+							 }
+					  });
+					  
+						 }
+					 });
 					</script>
 					
 					</section>

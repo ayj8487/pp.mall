@@ -89,7 +89,37 @@ public class ShopController {
 	 
 	 service.registReply(reply);
 	} 
+	// 상품 소감(댓글) 삭제
 	
+//	1. 현재 세션을 가져와 변수 member에 저장, 
+//	아이디 체크용 쿼리의 결과를 가져와서 변수 userId에 저장
+//	2. 변수 member에서 userId부분만 추출한 값과, 변수 userId의 값을 비교후 
+//	비교식은 이퀄(=) 부호 2개가 아닌 이퀄 메서드 .equals() 를 사용.
+//	3. 이렇게 현재 로그인한 사용자의 아이디와 소감을 작성한 사용자의 아이디를 비교했을 때, 
+//	결과가 참(true)이라면 삭제 작업을 진행한 뒤 변수 result에 1을 저장하고, 거짓(false)이라면 아무 작업을 하지 않고 끝냄
+//	4. 변수 result의 결과가 0이라면 아이디가 다르기에 삭제 작업이 진행되지 않으며, 
+//	변수 result의 결과가 1이라면 아이디가 같아서 삭제 작업이 진행.
+	
+	@ResponseBody
+	@RequestMapping(value = "/view/deleteReply", method = RequestMethod.POST)
+	public int getReplyList(ReplyVO reply,  HttpSession session) throws Exception {
+	 logger.info("post delete reply");
+
+	 int result = 0;
+	 
+	 MemberVO member = (MemberVO)session.getAttribute("member");
+	 String userId = service.idCheck(reply.getRepNum());
+	   
+	 if(member.getUserId().equals(userId)) {
+	  
+	  reply.setUserId(member.getUserId());
+	  service.deleteReply(reply);
+	  
+	  result = 1;
+	 }
+	 
+	 return result; 
+	}
 	
 	
 }
