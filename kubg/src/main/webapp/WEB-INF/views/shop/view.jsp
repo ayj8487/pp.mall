@@ -97,6 +97,16 @@ aside#aside li > ul.low li { width:180px; }
 section.replyList div.replyFooter button { font-size:14px; border: 1px solid #999; background:none; margin-right:10px; }
 </style>
 
+<style>
+/* 상품소감(댓글) 수정 모달창 : display:none으로 화면에서 숨김*/
+ div.replyModal { position:relative; z-index:1; display:none;}
+ div.modalBackground { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0, 0, 0, 0.8); z-index:-1; }
+ div.modalContent { position:fixed; top:20%; left:calc(50% - 250px); width:500px; height:250px; padding:20px 10px; background:#fff; border:2px solid #666;}
+ div.modalContent textarea { font-size:16px; font-family:'맑은 고딕', verdana; padding:10px; width:500px; height:200px; }
+ div.modalContent button { font-size:20px; padding:5px 10px; margin:10px 0; background:#fff; border:1px solid #ccc; }
+ div.modalContent button.modal_cancel { margin-left:20px; }
+</style>
+
 <!--  상품 댓글목록(리스트) ajax활성 --> 
   <script> 
   function replyList() {
@@ -109,20 +119,26 @@ section.replyList div.replyFooter button { font-size:14px; border: 1px solid #99
 	    
 	    console.log(data);
 	    
+	    //날짜 데이터를 보기 쉽게 변환
 	    var repDate = new Date(this.repDate);
 	    repDate = repDate.toLocaleDateString("ko-US")
 	    
-	    str += "<li data-gdsNum='" + this.gdsNum + "'>"
+	    //HTML 코드 조합
+	    str += "<li data-repNum='" + this.repNum + "'>"
 	      + "<div class='userInfo'>"
 	      + "<span class='userName'>" + this.userName + "</span>"
 	      + "<span class='date'>" + repDate + "</span>"
 	      + "</div>"
 	      + "<div class='replyContent'>" + this.repCon + "</div>"
 	      
+	      + "<c:if test='${member != null}'>"
+	      
 	      + "<div class='replyFooter'>"
 	      + "<button type='button' class='modify' data-repNum='" + this.repNum + "'>수정</button>"
 	      + "<button type='button' class='delete' data-repNum='" + this.repNum + "'>삭제</button>"
 	      + "</div>"
+	      
+	      + "</c:if>"
 	      
 	      + "</li>";           
 	   });
@@ -317,6 +333,37 @@ section.replyList div.replyFooter button { font-size:14px; border: 1px solid #99
 					replyList();
 					</script>
 					
+					<!-- 댓글 수정 모달 창, 제이쿼리내장 페이드(fade) 이용시 기존코드 주석처리 : 300 => 0.3초 -->
+				
+					<!-- 
+					변수 repNum에는 버튼에 부여된 소감 번호(data-repNum)를 저장, 
+					변수 repCon에는 버튼의 부모(parent)의 
+					부모에서 자식의 클래스가 replyContent인 요소의 값을 저장.
+			
+					M 버튼의 부모는 <div class="replyFooter">, 
+					<div class="replyFooter"> 의 부모는 <li data-repNum="11">, 
+					<li data-repNum="11"> 의 자식중 클래스가 replyContent인건 '소감 내용'.
+					repNum에 저장된 소감 번호는 모달창의 버튼에 부여하고, 
+					repCon에 저장된 소감 내용은 모달창의 텍스트에어리어에 부여.
+					 -->
+
+					<script>
+					$(document).on("click", ".modify", function(){
+					//	 $(".replyModal").attr("style", "display:block;");
+						 $(".replyModal").fadeIn(300);
+	
+				//수정 버튼을 눌러서 나오는 모달창의 텍스트에어리어에는 선택했던 버튼에 해당되는 소감 내용이 들어가며, 
+				//수정 버튼에는 선택했던 버튼의 상품 번호가 부여시킴. 
+
+						 var repNum = $(this).attr("data-repNum");
+						 var repCon = $(this).parent().parent().children(".replyContent").text();
+						 
+						 $(".modal_repCon").val(repCon);
+						 $(".modal_modify_btn").attr("data-repNum", repNum);
+						
+					});
+					</script>
+					
 					<!-- 댓글 삭제 -->
 					
 					<!-- 
@@ -369,5 +416,77 @@ section.replyList div.replyFooter button { font-size:14px; border: 1px solid #99
 	</footer>
 	
 </div>
+	
+			<!-- 상품소감(댓글) 수정 모달 창 display:none으로 숨김 -->
+			<div class="replyModal">
+			
+			 <div class="modalContent">
+			  
+			  <div>
+			   <textarea class="modal_repCon" name="modal_repCon"></textarea>
+			  </div>
+			  
+			  <div>
+			   <button type="button" class="modal_modify_btn">수정</button>
+			   <button type="button" class="modal_cancel">취소</button>
+			  </div>
+			  
+			 </div>
+			
+			 <div class="modalBackground"></div>
+			 
+			</div>
+
+<!-- 댓글수정 모달 창 닫기, 페이드 이용시 기존코드 주석 : 300 => 0.3초 -->
+<script>
+$(".modal_cancel").click(function(){
+// $(".replyModal").attr("style", "display:none;");
+ $(".replyModal").fadeOut(300);
+
+});
+</script>
+
+
+	<!-- 댓글 수정 (댓글 삭제와 같은맥락의 코드이며
+	
+	1. 데이터를 Json형태로 저장후 
+	2. Ajax를 이용해 컨트롤러로 값을 전달
+	3. 컨트롤러에서 되돌아오는 result 1이면 성공, 0이면 실패 
+	4. 수정 스크립트는 모달창 HTML코드 밑에 위치해 있어야함 
+	)-->
+	<script>
+	$(".modal_modify_btn").click(function(){
+		 var modifyConfirm = confirm("댓글을 수정하시겠습니까?");
+		 
+		 if(modifyConfirm) {
+		  var data = {
+		     repNum : $(this).attr("data-repNum"),
+		     repCon : $(".modal_repCon").val()
+		    };  // ReplyVO 형태로 데이터 생성
+		  
+		  $.ajax({
+		   url : "/shop/view/modifyReply",
+		   type : "post",
+		   data : data,
+		   success : function(result){
+		    
+		   //result의 값에 따라 동작 
+		    if(result == 1) {
+		     replyList();	// 리스트 새로고침
+		     $(".replyModal").fadeOut(200);
+		    } else {
+		     alert("작성자가 아닙니다.");       
+		    }
+		   },
+		   error : function(){
+			   // 로그인하지 않아서 에러가 발생한 경우 
+		    alert("로그인후 이용 바랍니다.")
+		   }
+		  });
+		 }
+		 
+		});
+	</script>
+
 </body>
 </html>

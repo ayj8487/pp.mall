@@ -121,5 +121,28 @@ public class ShopController {
 	 return result; 
 	}
 	
+	// 상품 소감(댓글) 수정 ,삭제 메서드와 크게다르지않음
+	
+	// 댓글을 작성한 사용자의 아이디와 현재 로그인한 아이디를 비교한뒤
+	// 같다면 수정작업을하고 result에 1을 저장, 같지 않다면 종료
+	@ResponseBody
+	@RequestMapping(value = "/view/modifyReply", method = RequestMethod.POST)
+	public int modifyReply(ReplyVO reply, HttpSession session) throws Exception {
+	 logger.info("modify reply");
+	 
+	 int result = 0;
+	 
+	 MemberVO member = (MemberVO)session.getAttribute("member");
+	 String userId = service.idCheck(reply.getRepNum());
+	 
+	 if(member.getUserId().equals(userId)) {
+	  
+	  reply.setUserId(member.getUserId());
+	  service.modifyReply(reply);
+	  result = 1;
+	 }
+	 
+	 return result;
+	} 
 	
 }

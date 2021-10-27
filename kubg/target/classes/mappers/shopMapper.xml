@@ -67,4 +67,12 @@ select
       where repNum = #{repNum}
 </select>
 
+<!-- 상품 소감(댓글) 수정 -->
+<update id="modifyReply">
+ update tbl_reply
+     set
+         repCon = #{repCon}
+     where repNum = #{repNum}
+         and userId = #{userId}
+</update>
 </mapper>

@@ -28,4 +28,7 @@ public interface ShopDAO {
 
 	//아이디체크
 	public String idCheck(int repNum) throws Exception;
+	
+	//상품소감(댓글) 수정 
+	public void modifyReply(ReplyVO reply) throws Exception;
 }
