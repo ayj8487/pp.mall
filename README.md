@@ -178,7 +178,7 @@ values (1,'pma8487@nate.com',TBL_REPLY_SEQ.nextval, '나이키 짱');
     cartStock   number          not null,
     addDate     date            default sysdate,
     primary key(cartNum, userId) 
-);
+    );
 
 ## 카트 번호 자동생성 시퀀스
     create sequence tbl_cart_seq;
