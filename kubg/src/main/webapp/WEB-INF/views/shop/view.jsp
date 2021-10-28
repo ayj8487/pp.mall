@@ -235,10 +235,42 @@ section.replyList div.replyFooter button { font-size:14px; border: 1px solid #99
 				 </script>
 				 
 				</p>
-				  
-				  <p class="addToCart">
-				   <button type="button">카트에 담기</button>
-				  </p>
+				  <!-- 카드(장바구니)담기 -->
+					<p class="addToCart">
+					 <button type="button" class="addCart_btn">장바구니</button>
+					 
+				<script>
+					 $(".addCart_btn").click(function(){
+					  var gdsNum = $("#gdsNum").val();
+					  var cartStock = $(".numBox").val();
+					           
+					  var data = {
+					    gdsNum : gdsNum,
+					    cartStock : cartStock
+					    };
+					  
+					  $.ajax({
+					   url : "/shop/view/addCart",
+					   type : "post",
+					   data : data,
+					   success : function(result){
+					    
+					    if(result == 1) {
+					     alert("상품을 장바구니에 담았습니다.");
+					     $(".numBox").val("1");
+					    } else {
+					     alert("회원가입 후 이용 가능합니다.")
+					     $(".numBox").val("1");
+					    }
+					   },
+					   error : function(){
+					    alert("세션이 만료되었습니다. 로그인 후 이용가능합니다.");
+					   }
+					  });
+					 });
+				</script>
+					</p>
+
 				 </div>
 				 
 				 <div class="gdsDes">${view.gdsDes}</div>

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kubg.domain.CartVO;
 import com.kubg.domain.GoodsViewVO;
 import com.kubg.domain.MemberVO;
 import com.kubg.domain.ReplyListVO;
@@ -145,4 +146,32 @@ public class ShopController {
 	 return result;
 	} 
 	
+	// 카트 담기 (수정 전)
+//	@ResponseBody
+//	@RequestMapping(value = "/view/addCart", method = RequestMethod.POST)
+//	public void addCart(CartVO cart, HttpSession session) throws Exception {
+//	 
+//	 MemberVO member = (MemberVO)session.getAttribute("member");
+//	 cart.setUserId(member.getUserId());
+//
+//	 service.addCart(cart);	 
+//	}
+	
+	// 카트 담기 (수정) -- ajax사용
+	@ResponseBody
+	@RequestMapping(value = "/view/addCart", method = RequestMethod.POST)
+	public int addCart(CartVO cart, HttpSession session) throws Exception {
+	 
+	 int result = 0;
+	 
+	 MemberVO member = (MemberVO)session.getAttribute("member");
+	 
+	 if(member != null) {
+	  cart.setUserId(member.getUserId());
+	  service.addCart(cart);
+	  result = 1;
+	 }
+	 
+	 return result;
+	}
 }
