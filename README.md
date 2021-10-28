@@ -184,12 +184,12 @@ create table tbl_cart (
 create sequence tbl_cart_seq;
 
 ## 회원(맴버) 테이블 참조쿼리 
-alter table tbl_cart
+    alter table tbl_cart
     add constraint tbl_cart_userId foreign key(userId)
     references tbl_member(userId);
 
 ## 상품 테이블 참조쿼리 
-alter table tbl_cart
+    alter table tbl_cart
     add constraint tbl_cart_gdsNum foreign key(gdsNum)
     references tbl_goods(gdsNum);
 
