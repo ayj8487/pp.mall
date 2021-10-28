@@ -162,16 +162,16 @@ insert into tbl_reply (gdsNum ,userId, repNum, repCon)
 values (1,'pma8487@nate.com',TBL_REPLY_SEQ.nextval, '나이키 짱');
 
 ## 상품댓글 정보와 유저의 닉네임을 같이 가져오기 위해 조인사용 테스트
-select 
-r.gdsNum, r.userId, r.repNum, r.repCon,r.repDate,
-m.userName
-from tbl_reply r
-    inner join tbl_member m
-    on r.userId = m.userid
- where gdsNum =1;
+    select 
+    r.gdsNum, r.userId, r.repNum, r.repCon,r.repDate,
+    m.userName
+    from tbl_reply r
+        inner join tbl_member m
+        on r.userId = m.userid
+     where gdsNum =1;
 
 ## 장바구니(카트) 테이블 생성
-create table tbl_cart (
+    create table tbl_cart (
     cartNum     number          not null,
     userId      varchar2(50)    not null,
     gdsNum      number          not null,
@@ -181,7 +181,7 @@ create table tbl_cart (
 );
 
 ## 카트 번호 자동생성 시퀀스
-create sequence tbl_cart_seq;
+    create sequence tbl_cart_seq;
 
 ## 회원(맴버) 테이블 참조쿼리 
     alter table tbl_cart
