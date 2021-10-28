@@ -169,3 +169,32 @@ from tbl_reply r
     inner join tbl_member m
     on r.userId = m.userid
  where gdsNum =1;
+
+## 장바구니(카트) 테이블 생성
+create table tbl_cart (
+    cartNum     number          not null,
+    userId      varchar2(50)    not null,
+    gdsNum      number          not null,
+    cartStock   number          not null,
+    addDate     date            default sysdate,
+    primary key(cartNum, userId) 
+);
+
+## 카트 번호 자동생성 시퀀스
+create sequence tbl_cart_seq;
+
+## 회원(맴버) 테이블 참조쿼리 
+alter table tbl_cart
+    add constraint tbl_cart_userId foreign key(userId)
+    references tbl_member(userId);
+
+## 상품 테이블 참조쿼리 
+alter table tbl_cart
+    add constraint tbl_cart_gdsNum foreign key(gdsNum)
+    references tbl_goods(gdsNum);
+
+## 상품 테이블 임시 데이터삽입 테스트 
+    insert into tbl_cart (cartNum, userId, gdsNum, cartStock)
+    VALUES (tbl_cart_seq.nextval, 'ayj8487@naver.com',1,2);
+    
+    select * from tbl_cart;
