@@ -2,6 +2,7 @@ package com.kubg.service;
 
 import java.util.List;
 
+import com.kubg.domain.CartListVO;
 import com.kubg.domain.CartVO;
 import com.kubg.domain.GoodsViewVO;
 import com.kubg.domain.ReplyListVO;
@@ -32,4 +33,8 @@ public interface ShopService {
 
 	//카트 담기
 	public void addCart(CartVO cart) throws Exception;
+
+	//카트리스트
+	public List<CartListVO> cartList(String userId) throws Exception;
+
 }

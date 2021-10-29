@@ -2,6 +2,7 @@ package com.kubg.persistence;
 
 import java.util.List;
 
+import com.kubg.domain.CartListVO;
 import com.kubg.domain.CartVO;
 import com.kubg.domain.GoodsViewVO;
 import com.kubg.domain.ReplyListVO;
@@ -35,4 +36,8 @@ public interface ShopDAO {
 	
 	//카트담기 
 	public void addCart(CartVO cart) throws Exception;
+
+	//카트리스트
+	public List<CartListVO> cartList(String userId) throws Exception;
+
 }
