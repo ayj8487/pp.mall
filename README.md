@@ -198,3 +198,18 @@ values (1,'pma8487@nate.com',TBL_REPLY_SEQ.nextval, '나이키 짱');
     VALUES (tbl_cart_seq.nextval, 'ayj8487@naver.com',1,2);
     
     select * from tbl_cart;
+
+## 카트리스트(장바구니 목록) 데이터 출력 조인사용 테스트     
+    -- 카트리스트(장바구니 목록)
+    -- 사용자 아이디로 구분하여 카트테이블과 상품정보를 가져오기위한 조인
+    -- row_number() over(order by c.cartnum desc) as num 은 출력되는 결과의 순서를 표기
+
+    select 
+    row_number() over(order by c.cartnum desc) as num,
+    c.cartnum, c.userid, c.gdsnum, c.cartstock, c.adddate,
+    g.gdsname, g.gdsprice, g.gdsthumbimg
+    from tbl_cart c
+    inner join tbl_goods g
+    on c.gdsnum = g.gdsnum
+    where c.userid = 'ayj8487@naver.com';
+
