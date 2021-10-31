@@ -37,4 +37,7 @@ public interface ShopService {
 	//카트리스트
 	public List<CartListVO> cartList(String userId) throws Exception;
 
+	//카트식제
+	public void deleteCart(CartVO cart) throws Exception;
+	
 }

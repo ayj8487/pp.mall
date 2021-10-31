@@ -187,6 +187,36 @@ public class ShopController {
 	 List<CartListVO> cartList = service.cartList(userId);
 	 
 	 model.addAttribute("cartList", cartList);
+	}
+	
+	// 카트 삭제
+	
+	//Ajax에서 전송받은 배열 chbox를 리스트형 변수 chArr로 받은뒤, for문을 이용해 chArr이 가지고있는 
+	//값의 갯수만큼 반복하며 result 를 이용해 0또는 1을 반납(로그인이 되어있는지 여부확인)
+	//에이젝스의 error를 이용해 구분할수 있지만, 컨트롤러보다 더 깊은 service와 dao를 거쳐 쿼리문이 실행되는 걸 막을 수 있음.
+	@ResponseBody
+	@RequestMapping(value = "/deleteCart", method = RequestMethod.POST)
+	public int deleteCart(HttpSession session,
+	     @RequestParam(value = "chbox[]") List<String> chArr, CartVO cart) throws Exception {
+	 logger.info("delete cart");
 	 
+	 MemberVO member = (MemberVO)session.getAttribute("member");
+	 String userId = member.getUserId();
+	 
+	 int result = 0;
+	 int cartNum = 0;
+	 
+	 
+	 if(member != null) {
+	  cart.setUserId(userId);
+	  
+	  for(String i : chArr) {   
+	   cartNum = Integer.parseInt(i);
+	   cart.setCartNum(cartNum);
+	   service.deleteCart(cart);
+	  }   
+	  result = 1;
+	 }  
+	 return result;  
 	}
 }

@@ -40,4 +40,7 @@ public interface ShopDAO {
 	//카트리스트
 	public List<CartListVO> cartList(String userId) throws Exception;
 
+	//카트삭제
+	public void deleteCart(CartVO cart) throws Exception;
+	
 }
