@@ -42,7 +42,7 @@
 ## 테이블과 카테고리 테이블의 참조 코드
     alter table tbl_goods add
     constraint fk_goods_category
-    foreign key (cateCode)
+      foreign key (cateCode)
         references goods_category(cateCode);
 
 ## 상품번호 시퀀스
@@ -166,7 +166,7 @@ https://ckeditor.com/ckeditor-4/download/?null-addons=
     r.gdsNum, r.userId, r.repNum, r.repCon,r.repDate,
     m.userName
     from tbl_reply r
-        inner join tbl_member m
+     inner join tbl_member m
         on r.userId = m.userid
      where gdsNum =1;
 
