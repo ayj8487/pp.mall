@@ -213,3 +213,29 @@ https://ckeditor.com/ckeditor-4/download/?null-addons=
     on c.gdsnum = g.gdsnum
     where c.userid = 'ayj8487@naver.com';
 
+## 상품 주문테이블 생성
+    -- 주문 고유번호(orderId), 
+    -- 수신자(orderRec), 
+    -- 주소 3가지(우편번호, 기본주소, 상세주소)(userAddr1,2,3), 
+    -- 연락처(orderPhon),
+    -- 총가격(amount), 
+    -- 주문 날짜로(orderDate)
+
+    create table tbl_order (
+    orderId     varchar2(50) not null,
+    userId      varchar2(50) not null,
+    orderRec    varchar2(50) not null,
+    userAddr1   varchar2(20) not null,
+    userAddr2   varchar2(50) not null,
+    userAddr3   varchar2(50) not null,
+    orderPhon   varchar2(30) not null,
+    amount      number       not null,
+    orderDate   Date         default sysdate,   
+    primary key(orderId)
+    );
+   
+## 주문테이블과 맴버(회원)테이블 참조설정 쿼리
+   alter table tbl_order
+     add constraint tbl_order_userId foreign key(userId)
+     references tbl_member(userId);
+
