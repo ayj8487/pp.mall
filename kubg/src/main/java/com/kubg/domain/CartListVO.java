@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class CartListVO {
 
-	/*
+	/* 장바구니 목록
 	 *  create	 table tbl_cart (
 	 *  cartNum 	number not null, 
 	 *  userId	 varchar2(50) not null, 

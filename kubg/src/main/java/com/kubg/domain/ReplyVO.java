@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class ReplyVO {
 
-	/*
+	/* 댓글 테이블
 	 * create table tbl_reply (
 	 * 
 	 *  gdsNum 	number not null, 

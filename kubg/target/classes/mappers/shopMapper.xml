@@ -101,4 +101,71 @@ select
          and userId = #{userId}
 </delete>
 
+<!-- 주문 정보 -->
+<insert id="orderInfo">
+ insert into tbl_order(orderId, userId, orderRec, userAddr1, userAddr2, userAddr3, orderPhon, amount)
+     values(#{orderId}, #{userId}, #{orderRec}, #{userAddr1}, #{userAddr2}, #{userAddr3}, #{orderPhon}, #{amount})
+</insert>
+   
+<!-- 주문 상세 정보 
+ 
+데이터를 삽입하는 insert 쿼리는 일반적으로 
+insert into 테이블명 (컬럼1, 컬럼2 ...) 
+values (데이터1, 데이터 2...) 처럼 되어있는데, 
+
+주문상세 정보는
+insert into 테이블명 (컬럼1, 컬럼2 ...) 
+select 데이터1, 데이터 2 ... 
+from 테이블명 으로, values 대신 테이블의 select문이 들어가있다.
+
+insert select 문이라고 하며, 
+select 에 있는 다수의 데이터를 입력할 수 있다.
+ -->
+
+<!-- 
+<insert id="orderInfo_Details">
+insert into tbl_order_details(orderDetailsNum, orderId, gdsNum, cartStock)
+	select tbl_order_details_seq.nextval, orderId, gdsNum, cartStock
+		from tbl_cart where orderId=#{orderId}
+</insert> 
+ -->
+
+<insert id="orderInfo_Details">
+insert into tbl_order_details(orderDetailsNum, orderId, gdsNum, cartStock)
+	select tbl_order_details_seq.nextval, #{orderId}, gdsNum, cartStock
+		from tbl_cart
+</insert>
+
+<!-- 카트 비우기 
+
+주문메서드 실행후 주문 데이터가 정상적으로 넘어갔다면, 
+더이상 카트 테이블에 있는 데이터는 불필요하므로 삭제시켜야 한다. 
+-->
+<delete id="cartAllDelete">
+ delete tbl_cart
+     where userId = #{userId}
+</delete>
+
+<!-- 본인 특정 주문 목록(축약) -->
+<select id="orderList" resultType="com.kubg.domain.OrderVO">
+ select
+     orderId, userId, orderRec, userAddr1, userAddr2, userAddr3, orderPhon, amount, orderDate
+ from tbl_order 
+     where userId = #{userId}
+</select>
+
+<!--본인 특정 주문 목록(상세) -->
+<select id="orderView" resultType="com.kubg.domain.OrderListVO">
+ select
+     o.orderId, o.userId, o.orderRec, o.userAddr1, o.userAddr2, o.userAddr3, o.orderPhon, o.amount, o.orderDate,
+     d.orderDetailsNum, d.gdsNum, d.cartStock,
+     g.gdsName, g.gdsThumbImg, g.gdsPrice
+ from tbl_order o
+         inner join tbl_order_details d
+             on o.orderId = d.orderId
+         inner join tbl_goods g
+             on d.gdsNum = g.gdsNum
+     where o.userId = #{userId}
+         and o.orderId = #{orderId}
+</select>
 </mapper>

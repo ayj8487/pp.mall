@@ -6,7 +6,8 @@ public class ReplyListVO {
 
 // 기존 ReplyVo에서 유저 닉네임(userName)을 추가해 
 // 조회하는 *댓글조회* 이기에 새로운 형태이므로 새로 만듦
-	
+
+	// 댓글 목록
 	private int gdsNum;
 	private String userId;
 	private int repNum;

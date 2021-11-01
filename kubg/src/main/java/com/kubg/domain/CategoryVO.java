@@ -2,7 +2,7 @@ package com.kubg.domain;
 
 public class CategoryVO {
 
-	/*
+	/* 카테고리
 	 * create table goods_category ( 
 	 * cateName varchar2(20) not null, 
 	 * cateCode varchar2(30) not null, 

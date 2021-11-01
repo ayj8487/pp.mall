@@ -1,5 +1,7 @@
 package com.kubg.controller;
 
+import java.text.DecimalFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -18,6 +20,9 @@ import com.kubg.domain.CartListVO;
 import com.kubg.domain.CartVO;
 import com.kubg.domain.GoodsViewVO;
 import com.kubg.domain.MemberVO;
+import com.kubg.domain.OrderDetailVO;
+import com.kubg.domain.OrderListVO;
+import com.kubg.domain.OrderVO;
 import com.kubg.domain.ReplyListVO;
 import com.kubg.domain.ReplyVO;
 import com.kubg.service.ShopService;
@@ -219,4 +224,80 @@ public class ShopController {
 	 }  
 	 return result;  
 	}
+	
+	// 주문 하기
+	
+	// 달력 메서드(Calendar)이용하여 연/월/일을 추출하고 
+	// 6자리의 랜덤 숫자로 만들어진 subNum을 더하여 
+	// 날짜_랜덤숫자 로 이루어진, 최대한 중복되지 않는 고유한 문자열을 생성. -- UUID로 대체 사용해도 무관
+	
+	@RequestMapping(value = "/cartList", method = RequestMethod.POST)
+	public String order(HttpSession session, OrderVO order, OrderDetailVO orderDetail) throws Exception {
+	 logger.info("order");
+	 
+	 MemberVO member = (MemberVO)session.getAttribute("member");  
+	 String userId = member.getUserId();
+	 
+	 Calendar cal = Calendar.getInstance();
+	 int year = cal.get(Calendar.YEAR);
+	 String ym = year + new DecimalFormat("00").format(cal.get(Calendar.MONTH) + 1);
+	 String ymd = ym +  new DecimalFormat("00").format(cal.get(Calendar.DATE));
+	 String subNum = "";
+	 
+	 for(int i = 1; i <= 6; i ++) {
+	  subNum += (int)(Math.random() * 10);
+	 }
+	 
+	 String orderId = ymd + "_" + subNum;
+	 
+	 order.setOrderId(orderId);
+	 order.setUserId(userId);
+	  
+	 service.orderInfo(order);
+	 
+	 orderDetail.setOrderId(orderId);   
+	 service.orderInfo_Details(orderDetail);
+	 
+	 // 주문 완료후 카트 비우기 
+	 // 주문 테이블과 주문상세 테이블을 생성뒤 카트테이블의 데이터를 모두 삭제
+	 service.cartAllDelete(userId);
+	 
+	 return "redirect:/shop/orderList";  
+	}
+	
+	// 주문 목록 리스트
+	@RequestMapping(value = "/orderList", method = RequestMethod.GET)
+	public void getOrderList(HttpSession session, OrderVO order, Model model) throws Exception {
+	 logger.info("get order list");
+	 
+	 MemberVO member = (MemberVO)session.getAttribute("member");
+	 String userId = member.getUserId();
+	 
+	 order.setUserId(userId);
+	 
+	 List<OrderVO> orderList = service.orderList(order);
+	 
+	 model.addAttribute("orderList", orderList);
+	}
+	
+	// 주문 목록 리스트(상세)
+	// URL에서 'n'에 지정된 값을 받아와서 orderId로 사용
+	@RequestMapping(value = "/orderView", method = RequestMethod.GET)
+	public void getOrderList(HttpSession session,
+	      @RequestParam("n") String orderId,
+	      OrderVO order, Model model) throws Exception {
+	 logger.info("get order view");
+	 
+	 MemberVO member = (MemberVO)session.getAttribute("member");
+	 String userId = member.getUserId();
+	 
+	 order.setUserId(userId);
+	 order.setOrderId(orderId);
+	 
+	 List<OrderListVO> orderView = service.orderView(order);
+	 
+	 model.addAttribute("orderView", orderView);
+	}
+	
+	
 }

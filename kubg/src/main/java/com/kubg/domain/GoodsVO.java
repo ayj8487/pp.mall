@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class GoodsVO {
 
-	/*
+	/* 상품 테이블
 	 * create table tbl_goods (
     gdsNum       number          not null,
     gdsName      varchar2(50)    not null,

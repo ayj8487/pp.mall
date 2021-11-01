@@ -11,7 +11,7 @@ com.kubg.serevice는 Service 패키지. DAO와 Controller 사이를 연결해주
  */
 	
 
-	/*
+	/* 회원 테이블
 	 * create table tbl_member (
     userId      varchar2(50)    not null,
     userPass    varchar2(100)   not null,

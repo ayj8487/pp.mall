@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class GoodsViewVO {
 
+	// 상품목록
 	private int gdsNum;
 	private String gdsName;
 	private String cateCode;
