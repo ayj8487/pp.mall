@@ -251,7 +251,7 @@ https://ckeditor.com/ckeditor-4/download/?null-addons=
 ## 주문상세번호(orderDetailsNum) 자동생성 시퀀스
     create sequence tbl_order_details_seq;
 
-## 주문 테이블(tbl_order) 과 주문상세 테이블(tbl_order_details) 참조설정 쿼리
+## 주문 테이블(tbl_order) 과 주문상세 테이블(tbl_order_details)  참조설정 쿼리
     alter table tbl_order_details
     add constraint tbl_order_details_orderId foreign key(orderId)
     references tbl_order(orderId);
