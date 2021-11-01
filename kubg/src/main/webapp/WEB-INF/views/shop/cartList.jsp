@@ -92,6 +92,14 @@ aside#aside li > ul.low li { width:180px; }
 .checkBox { float:left; width:30px; }
 .checkBox input { width:16px; height:16px; }
 
+/* 장바구니 상품 총합계 */
+.listResult { padding:20px; background:#eee; }
+.listResult .sum { float:left; width:45%; font-size:22px; }
+
+.listResult .orderOpne { float:right; width:45%; text-align:right; }
+.listResult .orderOpne button { font-size:18px; padding:5px 10px; border:1px solid #999; background:#fff;}
+.listResult::after { content:""; display:block; clear:both; }
+
 </style>
 	
 </head>
@@ -171,6 +179,8 @@ aside#aside li > ul.low li { width:180px; }
 				  </div>
 				  
 				 </li>
+				<!-- 카트목록내 모든상품의 가격 저장(장바구니 상품 가격총합계) -->
+				<c:set var="sum" value="0" />
 				
 				 <c:forEach items="${cartList}" var="cartList">
 				 <li>
@@ -229,8 +239,21 @@ aside#aside li > ul.low li { width:180px; }
 					</div>
 				  </div>   
 				 </li>
-				 </c:forEach>
+				 
+				<c:set var="sum" value="${sum + (cartList.gdsPrice * cartList.cartStock)}" />
+				 
+			 </c:forEach>
+			
 			</ul>
+				<!-- 장바구니 상품 가격 총합계 -->
+				<div class="listResult">
+				 <div class="sum">
+				  총 합계 : <fmt:formatNumber pattern="###,###,###" value="${sum}" />원
+				 </div>
+				 <div class="orderOpne">
+				  <button type="button" class="orderOpne_bnt">주문 정보 입력</button>
+				 </div>
+				</div>
 			
 			</section>
 			
