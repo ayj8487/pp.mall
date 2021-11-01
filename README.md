@@ -235,7 +235,29 @@ https://ckeditor.com/ckeditor-4/download/?null-addons=
     );
    
 ## 주문테이블과 맴버(회원)테이블 참조설정 쿼리
-   alter table tbl_order
-     add constraint tbl_order_userId foreign key(userId)
-     references tbl_member(userId);
+    alter table tbl_order
+    add constraint tbl_order_userId foreign key(userId)
+    references tbl_member(userId);
 
+## 주문상세 테이블 생성 (주문정보와 카트테이블의 데이터를 추가로 가져옴)
+    create table tbl_order_details (
+    orderDetailsNum number       not null,
+    orderId         varchar2(50) not null,
+    gdsNum          number          not null,
+    cartStock       number          not null,
+    primary key(orderDetailsNum)
+    );
+
+## 주문상세번호(orderDetailsNum) 자동생성 시퀀스
+    create sequence tbl_order_details_seq;
+
+## 주문 테이블(tbl_order) 과 주문상세 테이블(tbl_order_details) 참조설정 쿼리
+    alter table tbl_order_details
+    add constraint tbl_order_details_orderId foreign key(orderId)
+    references tbl_order(orderId);
+
+    -- 하나의 주문에 여러개의 상품이 들어갈 수 있는데 만약 하나의 테이블로 처리하려고 한다면, 
+    -- 상품 6개가 들어있는 하나의 주문은 총 6개의 데이터가 들어가게됨.
+
+    -- 이렇게되면 각 상품의 정보를 제외하곤 모두 중복 데이터이므로, 비효율적이다. 
+    -- 하지만 두개의 테이블로 분류되었다면, 중복되는 데이터를 최소화하여 관리할 수 있다.
