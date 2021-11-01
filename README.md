@@ -261,3 +261,18 @@ https://ckeditor.com/ckeditor-4/download/?null-addons=
 
     -- 이렇게되면 각 상품의 정보를 제외하곤 모두 중복 데이터이므로, 비효율적이다. 
     -- 하지만 두개의 테이블로 분류되었다면, 중복되는 데이터를 최소화하여 관리할 수 있다.
+
+## 주문완료시 모든정보를 출력하는 주문상세 조인(join) 테스트
+    -- 주문 테이블(tbl_order),주문 상세테이블(tbl_order_details), 상품테이블(tbl_goods)
+    select
+    o.orderid, o.userid, o.orderrec,o.useraddr1,o.useraddr2,o.useraddr3,o.orderphon,o.amount,o.orderdate,
+    d.orderdetailsnum, d.gdsnum, d.cartstock,
+    g.gdsname,g.gdsthumbimg, g.gdsprice
+    from tbl_order o
+        inner join tbl_order_details d
+        on o.orderid = d.orderid
+        inner join tbl_goods g
+        on d.gdsnum = g.gdsnum
+    where o.userid = 'ayj8487@naver.com'
+     and o.orderid = '20211102_372371';
+     
