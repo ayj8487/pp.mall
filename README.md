@@ -276,3 +276,24 @@ https://ckeditor.com/ckeditor-4/download/?null-addons=
     where o.userid = 'ayj8487@naver.com'
       and o.orderid = '20211102_372371';
      
+## 관리자모드 주문상태 확인 시 데이터 출력 테스트 
+    -- 모든 주문사항 
+    select
+    orderId, userId, orderRec,
+    userAddr1, userAddr2, userAddr3,
+    orderPhon, amount, orderDate, delivery
+    from tbl_order;
+    
+    --특정 주문 목록 
+    select
+    o.orderId, o.userId, o.orderRec,
+    o.userAddr1, o.userAddr2, o.userAddr3,
+    o.orderPhon, o.amount, o.orderDate, o.delivery,
+    d.orderDetailsNum, d.gdsNum, d.cartStock,
+    g.gdsName, g.gdsThumbImg, g.gdsPrice
+    from tbl_order o
+    inner join tbl_order_details d
+    on o.orderId = d.orderId
+    inner join tbl_goods g
+    on d.gdsNum = g.gdsNum
+    where o.orderId = '';
