@@ -109,6 +109,9 @@ aside#aside li > ul.low li { width:180px; }
 				   <p><span>수령인</span>${orderList.orderRec}</p>
 				   <p><span>주소</span>(${orderList.userAddr1}) ${orderList.userAddr2} ${orderList.userAddr3}</p>
 				   <p><span>가격</span><fmt:formatNumber pattern="###,###,###" value="${orderList.amount}" /> 원</p>
+	
+				  <p><span>상태</span>${orderList.delivery} </p>
+
 				  </div>
 				  </li>
 				  </c:forEach>

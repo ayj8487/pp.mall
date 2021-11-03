@@ -5,6 +5,8 @@ import java.util.List;
 import com.kubg.domain.CategoryVO;
 import com.kubg.domain.GoodsVO;
 import com.kubg.domain.GoodsViewVO;
+import com.kubg.domain.OrderListVO;
+import com.kubg.domain.OrderVO;
 
 public interface AdminDAO {
 
@@ -25,5 +27,14 @@ public interface AdminDAO {
 	
 	//상품 삭제
 	public void goodsDelete(int gdsNum) throws Exception;
+	
+	//주문 목록 리스트
+	public List<OrderVO> orderList() throws Exception;
+
+	//주문 목록 리스트(상세)
+	public List<OrderListVO> orderView(OrderVO order) throws Exception;
+
+	//배송 상태
+	public void delivery(OrderVO order) throws Exception;
 	
 }

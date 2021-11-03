@@ -29,7 +29,17 @@ public class OrderVO {
 	private int amount;
 	private Date orderDate;
 	
+	//주문 배송 추가
+	private String delivery;
 	
+	
+	
+	public String getDelivery() {
+		return delivery;
+	}
+	public void setDelivery(String delivery) {
+		this.delivery = delivery;
+	}
 	public String getOrderId() {
 		return orderId;
 	}

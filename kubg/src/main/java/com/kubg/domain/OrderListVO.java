@@ -26,8 +26,16 @@ public class OrderListVO {
 	private String gdsThumbImg;
 	private int gdsPrice;
 	
+	// 주문 배송 추가 
+	private String delivery;
 	
 	
+	public String getDelivery() {
+		return delivery;
+	}
+	public void setDelivery(String delivery) {
+		this.delivery = delivery;
+	}
 	public String getOrderId() {
 		return orderId;
 	}

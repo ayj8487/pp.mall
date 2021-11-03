@@ -111,13 +111,16 @@ aside#aside li > ul.low li { width:180px; }
 				    <p><span>수령인</span>${orderView.orderRec}</p>
 				    <p><span>주소</span>(${orderView.userAddr1}) ${orderView.userAddr2} ${orderView.userAddr3}</p>
 				    <p><span>가격</span><fmt:formatNumber pattern="###,###,###" value="${orderView.amount}" /> 원</p>
+				 
+				  <p><span>상태</span>${orderView.delivery} </p>
+
 				   </c:if>
 				   
 				  </c:forEach>
 				 </div>
 				 
 				 <ul class="orderView">
-				  <c:forEach items="${orderView}" var="orderView">     
+				  <c:forEach items="${orderView}" var="orderView" >     
 				  <li>
 				   <div class="thumb">
 				    <img src="${orderView.gdsThumbImg}" />
