@@ -297,3 +297,9 @@ https://ckeditor.com/ckeditor-4/download/?null-addons=
     inner join tbl_goods g
     on d.gdsNum = g.gdsNum
     where o.orderId = '';
+
+## 주문 테이블에 배송관련 컬럼 추가  
+    alter table tbl_order
+    add(
+    delivery    varchar2(20)    default '배송준비'
+    );
