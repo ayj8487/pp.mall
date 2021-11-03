@@ -304,3 +304,8 @@ https://ckeditor.com/ckeditor-4/download/?null-addons=
     add(
     delivery    varchar2(20)    default '배송준비'
     );
+
+## 배송정보를 수정하는 쿼리 테스트
+    update tbl_order
+    set delivery = '배송 중'
+    where orderid = '20211104_662642';
