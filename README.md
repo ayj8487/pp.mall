@@ -299,6 +299,7 @@ https://ckeditor.com/ckeditor-4/download/?null-addons=
     where o.orderId = '';
 
 ## 주문 테이블에 배송관련 컬럼 추가  
+    -- 컬럼 추가시 해당 테이블을 사용하는 메퍼(mapper)에도 추가 
     alter table tbl_order
     add(
     delivery    varchar2(20)    default '배송준비'
