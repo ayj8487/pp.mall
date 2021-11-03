@@ -274,5 +274,5 @@ https://ckeditor.com/ckeditor-4/download/?null-addons=
         inner join tbl_goods g
         on d.gdsnum = g.gdsnum
     where o.userid = 'ayj8487@naver.com'
-     and o.orderid = '20211102_372371';
+      and o.orderid = '20211102_372371';
      
