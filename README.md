@@ -314,3 +314,7 @@ https://ckeditor.com/ckeditor-4/download/?null-addons=
     update tbl_goods
     set gdsStock = gdsStock - 2
     where gdsNum = 2;
+
+## 상품 수량 조절 확인 쿼리 테스트 
+     select orderid, gdsnum, cartstock from tbl_order_details
+     where orderId ='20211104_662642'; 
