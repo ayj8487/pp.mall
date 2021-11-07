@@ -73,4 +73,10 @@ public class AdminServiceImpl implements AdminService {
 		dao.delivery(order);
 	}
 
+	//상품 수량 조절
+	@Override
+	public void changeStock(GoodsVO goods) throws Exception {
+		dao.changeStock(goods);
+	}
+
 }

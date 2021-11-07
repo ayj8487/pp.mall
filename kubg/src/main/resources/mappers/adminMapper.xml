@@ -121,7 +121,21 @@
  update tbl_order
      set delivery = #{delivery}
  where orderId = #{orderId}
- 
+ </update>
+
+<!-- 상품 수량 조절 -->
+<update id="changeStock">
+ update tbl_goods
+     set gdsStock = gdsStock - #{gdsStock}
+ where gdsNum = #{gdsNum}
 </update>
 
+
+<!-- 상품 수량 보조 -->
+<select id="changeStock_sub" resultType="com.kubg.domain.OrderDetailVO">
+	select
+	orderId, gdsNum, cartStock
+	from tbl_order_details
+	where orderId = #{orderId}
+</select>
 </mapper>

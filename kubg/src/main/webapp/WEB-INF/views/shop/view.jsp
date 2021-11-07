@@ -202,6 +202,9 @@ section.replyList div.replyFooter button { font-size:14px; border: 1px solid #99
 				   <span>재고 </span><fmt:formatNumber pattern="###,###,###" value="${view.gdsStock}" /> EA
 				  </p>
 				  
+			    <!-- 수량이 0이 아닐시 수량 증감 버튼과 장바구니담기 버튼 보이기 -->
+				  <c:if test="${view.gdsStock != 0}">
+				  
 				<p class="cartStock">
 				<!-- 수량직접입력시 실수를 막기위해 제이쿼리 선택자를 이용, 재고량을 초과할수 없게끔, 최소량은 1 -->
 				 <span>구입 수량</span>
@@ -270,7 +273,13 @@ section.replyList div.replyFooter button { font-size:14px; border: 1px solid #99
 					 });
 				</script>
 					</p>
-
+				
+				</c:if>
+					
+				<!-- 주문상태 배송완료 시 수량이 감소하며 수량이 0일때 품절 표시 -->
+				<c:if test="${view.gdsStock == 0}">
+					<p style="color : red">품절된 상품 입니다.</p>
+				</c:if>
 				 </div>
 				 
 				 <div class="gdsDes">${view.gdsDes}</div>

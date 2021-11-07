@@ -266,13 +266,23 @@ public class AdminController {
 	 model.addAttribute("orderView", orderView);
 	}
 	
-	// 주문 상세 목록 - 배송 상태 변경
+	// 주문 상세 목록 - 배송 상태 변경, 반복문으로 주문완료시 수량감소 추가
 	@RequestMapping(value = "/shop/orderView", method = RequestMethod.POST)
 	public String delivery(OrderVO order) throws Exception {
 	 logger.info("post order view");
 	   
 	 adminService.delivery(order);
 
+	 List<OrderListVO> orderView = adminService.orderView(order); 
+
+	 GoodsVO goods = new GoodsVO();
+	   
+	 for(OrderListVO i : orderView) {
+	  goods.setGdsNum(i.getGdsNum());
+	  goods.setGdsStock(i.getCartStock());
+	  adminService.changeStock(goods);
+	 }
+	 
 	 return "redirect:/admin/shop/orderView?n=" + order.getOrderId();
 	}
 	
