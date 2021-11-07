@@ -309,3 +309,8 @@ https://ckeditor.com/ckeditor-4/download/?null-addons=
     update tbl_order
     set delivery = '배송 중'
     where orderid = '20211104_662642';
+    
+## 상품 수량 조절 쿼리 테스트 
+    update tbl_goods
+    set gdsStock = gdsStock - 2
+    where gdsNum = 2;
