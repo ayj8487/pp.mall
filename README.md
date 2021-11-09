@@ -39,7 +39,7 @@
     foreign key(cateCodeRef) references goods_category(cateCode)
     );
 
-## 테이블과  카테고리 테이블의 참조 코드
+## 테이블과 카테고리 테이블의 참조 코드
     alter table tbl_goods add
     constraint fk_goods_category
       foreign key (cateCode)
