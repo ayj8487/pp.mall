@@ -12,7 +12,7 @@
 	<li><a href="/admin/shop/orderList">주문 목록</a></li>
 
 	<!-- 상품댓글 확인 -->
-	<li><a href="">상품 소감</a></li>
+	<li><a href="/admin/shop/allReply">전체 댓글관리</a></li>
 
 	<!-- 유저 정보확인 -->
 	<li><a href="">유저 목록</a></li>
