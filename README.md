@@ -318,3 +318,11 @@ https://ckeditor.com/ckeditor-4/download/?null-addons=
 ## 상품 수량 조절 확인 쿼리 테스트 
      select orderid, gdsnum, cartstock from tbl_order_details
      where orderId ='20211104_662642'; 
+
+## 모든 상품의 댓글 출력 쿼리 테스트
+    select 
+    r.gdsnum, r.userid, r.repnum, r.repcon, r.repdate,
+    m.username
+    from tbl_reply r
+        inner join tbl_member m
+        on r.userid = m.userid; 
