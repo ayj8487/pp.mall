@@ -4,7 +4,7 @@
 ## Oracle 테이블
 
 ## 회원 테이블
-    create table tbl_member (
+    create table tbl_member  (
     userId      varchar2(50)    not null,
     userPass    varchar2(100)   not null,
     userName    varchar2(30)    not null,
