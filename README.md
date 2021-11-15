@@ -326,3 +326,8 @@ https://ckeditor.com/ckeditor-4/download/?null-addons=
     from tbl_reply r
         inner join tbl_member m
         on r.userid = m.userid; 
+
+## 주소 API
+http://postcode.map.daum.net/guide
+iframe을 이용하여 레이어 띄우기 사용
+
