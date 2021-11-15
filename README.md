@@ -331,3 +331,13 @@ https://ckeditor.com/ckeditor-4/download/?null-addons=
 http://postcode.map.daum.net/guide
 iframe을 이용하여 레이어 띄우기 사용
 
+
+## 주소 API 사용 시 주문테이블(tbl_order) 의 userAddr 컬럼의 크기가 작아 여유있게 변경 
+    alter table tbl_order
+        modify(userAddr1 varchar2(100));
+
+    alter table tbl_order
+        modify(userAddr2 varchar2(100));
+
+    alter table tbl_order
+        modify(userAddr3 varchar2(100));
