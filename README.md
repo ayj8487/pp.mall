@@ -341,3 +341,11 @@ iframe을 이용하여 레이어 띄우기 사용
 
     alter table tbl_order
         modify(userAddr3 varchar2(100));
+
+## 관리자모드 전체회원 조회 쿼리 테스트
+    select DISTINCT m.userid, m.username, m.userphon, m.regidate,
+    o.useraddr1,o.useraddr2,o.useraddr3
+    from tbl_order o
+        full outer join tbl_member m
+        on m.userid = o.userid 
+        order by regidate desc;
