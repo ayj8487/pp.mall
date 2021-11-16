@@ -154,4 +154,14 @@
  delete tbl_reply
      where repNum = #{repNum}
 </delete>
+
+<!-- 회원조회, 가입시 주소는 공란이며 상품주문시 주소가 입력됨-->
+<select id="memberList" resultType="com.kubg.domain.MemberVO">
+select DISTINCT m.userid, m.username, m.userphon, m.regidate,
+o.useraddr1,o.useraddr2,o.useraddr3
+from tbl_order o
+    full outer join tbl_member m
+    on m.userid = o.userid
+    order by regidate desc
+</select>
 </mapper>

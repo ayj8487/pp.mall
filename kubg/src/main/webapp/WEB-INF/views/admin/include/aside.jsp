@@ -15,5 +15,5 @@
 	<li><a href="/admin/shop/allReply">전체 댓글관리</a></li>
 
 	<!-- 유저 정보확인 -->
-	<li><a href="">유저 목록</a></li>
+	<li><a href="/admin/shop/memberList">회원 조회</a></li>
 </ul>

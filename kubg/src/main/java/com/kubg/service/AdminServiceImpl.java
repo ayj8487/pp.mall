@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kubg.domain.CategoryVO;
 import com.kubg.domain.GoodsVO;
 import com.kubg.domain.GoodsViewVO;
+import com.kubg.domain.MemberVO;
 import com.kubg.domain.OrderListVO;
 import com.kubg.domain.OrderVO;
 import com.kubg.domain.ReplyListVO;
@@ -85,10 +86,17 @@ public class AdminServiceImpl implements AdminService {
 	public List<ReplyListVO> allReply() throws Exception {
 		return dao.allReply();
 	}
-
+	
+	//댓글 삭제 
 	@Override
 	public void deleteReply(int repNum) throws Exception {
 		dao.deleteReply(repNum);
+	}
+
+	//회원 조회
+	@Override
+	public List<MemberVO> memberList() throws Exception {
+		return dao.memberList();
 	}
 
 }

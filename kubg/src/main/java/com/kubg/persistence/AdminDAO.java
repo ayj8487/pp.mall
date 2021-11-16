@@ -5,6 +5,7 @@ import java.util.List;
 import com.kubg.domain.CategoryVO;
 import com.kubg.domain.GoodsVO;
 import com.kubg.domain.GoodsViewVO;
+import com.kubg.domain.MemberVO;
 import com.kubg.domain.OrderListVO;
 import com.kubg.domain.OrderVO;
 import com.kubg.domain.ReplyListVO;
@@ -47,4 +48,7 @@ public interface AdminDAO {
 	//댓글 삭제
 	public void deleteReply(int repNum) throws Exception;
 
+	//회원 조회
+	public List<MemberVO> memberList() throws Exception;
+	
 }

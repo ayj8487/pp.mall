@@ -27,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kubg.domain.CategoryVO;
 import com.kubg.domain.GoodsVO;
 import com.kubg.domain.GoodsViewVO;
+import com.kubg.domain.MemberVO;
 import com.kubg.domain.OrderListVO;
 import com.kubg.domain.OrderVO;
 import com.kubg.domain.ReplyListVO;
@@ -308,4 +309,12 @@ public class AdminController {
 		return "redirect:/admin/shop/allReply";
 	}
 	
+	// 회원 조회
+	@RequestMapping(value = "/shop/memberList", method = RequestMethod.GET)
+	public void getMemberList(Model model) throws Exception{
+		
+		List<MemberVO> member = adminService.memberList();
+		
+		model.addAttribute("member", member);
+	}
 }

@@ -33,8 +33,8 @@
   </div>
   
   <div class="input_area">
-   <label for="userName">닉네임</label>
-   <input type="text" id="userName" name="userName" placeholder="닉네임을 입력해주세요" required="required" />      
+   <label for="userName">이름</label>
+   <input type="text" id="userName" name="userName" placeholder="이름을 입력해주세요" required="required" />      
   </div>
   
   <div class="input_area">
