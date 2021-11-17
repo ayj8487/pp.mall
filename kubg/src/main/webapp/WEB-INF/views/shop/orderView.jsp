@@ -120,7 +120,7 @@ aside#aside li > ul.low li { width:180px; }
 				 </div>
 				 
 				 <ul class="orderView">
-				  <c:forEach items="${orderView}" var="orderView" >     
+				  <c:forEach items="${orderView}" var="orderView" varStatus="status" >     
 				  <li>
 				   <div class="thumb">
 				    <img src="${orderView.gdsThumbImg}" />
@@ -135,7 +135,7 @@ aside#aside li > ul.low li { width:180px; }
 				    </p>
 				   </div>
 				   
-				  </li>     
+				  </li>
 				  </c:forEach>
 				 </ul>
 				</section>

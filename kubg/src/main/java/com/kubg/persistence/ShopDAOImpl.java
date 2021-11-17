@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kubg.domain.CartListVO;
 import com.kubg.domain.CartVO;
+import com.kubg.domain.GoodsVO;
 import com.kubg.domain.GoodsViewVO;
 import com.kubg.domain.OrderDetailVO;
 import com.kubg.domain.OrderListVO;
@@ -136,6 +137,8 @@ public class ShopDAOImpl implements ShopDAO {
 	public List<OrderListVO> orderView(OrderVO order) throws Exception {
 		return sql.selectList(namespace + ".orderView", order);
 	}
+
+
 
 
 

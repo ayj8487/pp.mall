@@ -76,7 +76,7 @@ aside#aside li > ul.low li { width:180px; }
 	
 	<section id="container">
 		<div id="container_box">
-			본문
+		<%@ include file="include/main.jsp" %>
 		</div>
 	</section>
 	

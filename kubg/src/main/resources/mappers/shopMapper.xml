@@ -168,4 +168,5 @@ insert into tbl_order_details(orderDetailsNum, orderId, gdsNum, cartStock)
      where o.userId = #{userId}
          and o.orderId = #{orderId}
 </select>
+
 </mapper>

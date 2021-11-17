@@ -2,5 +2,5 @@
     pageEncoding="UTF-8"%>
 
 <h1 class="title">
-	<a href="/admin/index">OiMarket / Admin</a>
+	<a href="/admin/index">Market / Admin</a>
 </h1>

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kubg.domain.CartListVO;
 import com.kubg.domain.CartVO;
+import com.kubg.domain.GoodsVO;
 import com.kubg.domain.GoodsViewVO;
 import com.kubg.domain.OrderDetailVO;
 import com.kubg.domain.OrderListVO;
@@ -124,6 +125,7 @@ public class ShopServiceImpl implements ShopService {
 	public List<OrderListVO> orderView(OrderVO order) throws Exception {
 		return dao.orderView(order);
 	}
+
 }
 
 

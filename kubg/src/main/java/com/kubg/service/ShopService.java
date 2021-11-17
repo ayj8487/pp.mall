@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kubg.domain.CartListVO;
 import com.kubg.domain.CartVO;
+import com.kubg.domain.GoodsVO;
 import com.kubg.domain.GoodsViewVO;
 import com.kubg.domain.OrderDetailVO;
 import com.kubg.domain.OrderListVO;

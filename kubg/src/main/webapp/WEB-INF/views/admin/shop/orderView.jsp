@@ -145,7 +145,7 @@ textarea#gdsDes { width:400px; height:180px; }
 			</div>
 			
 				<ul class="orderView">
-				 <c:forEach items="${orderView}" var="orderView">     
+				 <c:forEach items="${orderView}" var="orderView" varStatus="status">     
 				 <li>
 				  <div class="thumb">
 				   <img src="${orderView.gdsThumbImg}" />
