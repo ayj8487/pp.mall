@@ -63,13 +63,21 @@ aside#aside li > ul.low li { width:180px; }
  section#content div.goodsThumb img { width:200px; height:200px; }
  section#content div.goodsName { padding:10px 0; text-align:center; }
  section#content div.goodsName a { color:#000; }
+
+input#search{ padding: 8px 10px; width: 30%; margin:2px; }
+
 </style>
 	
 </head>
 <body>
+	
+	<div class ="search">
+			<input type="text" id="search"  placeholder="찾고 싶은 상품을 검색해보세요!">
+	</div>
 
 	<section id="container">
 		<div id="container_box">
+			
 			<section id="content">
 				<ul>
 				
