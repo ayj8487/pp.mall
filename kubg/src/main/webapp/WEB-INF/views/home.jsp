@@ -76,7 +76,7 @@ aside#aside li > ul.low li { width:180px; }
 	
 	<section id="container">
 		<div id="container_box">
-		<%@ include file="include/main.jsp" %>
+		<%@ include file="shop/main.jsp" %>
 		</div>
 	</section>
 	

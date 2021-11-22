@@ -169,4 +169,11 @@ insert into tbl_order_details(orderDetailsNum, orderId, gdsNum, cartStock)
          and o.orderId = #{orderId}
 </select>
 
+<!-- 전체 상품 -->
+<select id="main" resultType="com.kubg.domain.GoodsVO">
+select gdsNum, gdsName, gdsThumbimg, gdsDate
+from tbl_goods
+order by gdsDate DESC
+</select>
+
 </mapper>

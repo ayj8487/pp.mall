@@ -126,6 +126,12 @@ public class ShopServiceImpl implements ShopService {
 		return dao.orderView(order);
 	}
 
+	//전체 상품
+	@Override
+	public List<GoodsVO> main() throws Exception {
+		return dao.main();
+	}
+
 }
 
 

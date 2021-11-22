@@ -1,14 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-
+	<title>Home</title>
+	
 	<style>
 
  body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
@@ -67,12 +64,35 @@ aside#aside li > ul.low li { width:180px; }
  section#content div.goodsName { padding:10px 0; text-align:center; }
  section#content div.goodsName a { color:#000; }
 </style>
-
+	
 </head>
 <body>
 
-본문
+	<section id="container">
+		<div id="container_box">
+			<section id="content">
+				<ul>
+				
+				 <c:forEach items="${main}" var="main">
+				 <li>
+				  <div class="goodsThumb">
+				   <a href="/shop/view?n=${main.gdsNum}">
+	   				   <img src="${main.gdsThumbImg}">
+				   </a>
+				  </div> 
+				  <div class="goodsName">
+				   <a href="/shop/view?n=${main.gdsNum}">${main.gdsName}</a>
+				  </div>
+				 </li>
+				 </c:forEach>
+				
+				</ul>
+			</section>
+			
+		</div>
+	</section>
 	
+
 	
 </body>
 </html>
