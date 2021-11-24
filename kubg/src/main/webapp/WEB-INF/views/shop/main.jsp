@@ -64,23 +64,32 @@ aside#aside li > ul.low li { width:180px; }
  section#content div.goodsName { padding:10px 0; text-align:center; }
  section#content div.goodsName a { color:#000; }
 
-input#search{ padding: 8px 10px; width: 30%; margin:2px; }
-
+div.search {    
+	padding-left: 20%;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
 </style>
 	
 </head>
 <body>
 	
-	<div class ="search">
-			<input type="text" id="search"  placeholder="찾고 싶은 상품을 검색해보세요!">
-	</div>
 
 	<section id="container">
 		<div id="container_box">
 			
 			<section id="content">
-				<ul>
 				
+				<!-- 검색 -->		
+				<div class ="search">
+				<button class="btn_img" id="btn_img" style="width: 50px; padding-bottom: 8px;" >
+				<img src="../resources/images/13311.png" style="width: 50%;">
+				</button>
+				<input type="text" size="25" id="search"  placeholder="찾고 싶은 상품을 검색해보세요!" style=" padding: 6px;" >
+				</div>
+
+				<!-- 전체 상품 -->			
+				<ul>
 				 <c:forEach items="${main}" var="main">
 				 <li>
 				  <div class="goodsThumb">
