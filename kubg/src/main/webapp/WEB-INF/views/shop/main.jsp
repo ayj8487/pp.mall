@@ -67,7 +67,6 @@ aside#aside li > ul.low li { width:180px; }
 div.search {    
 	padding-left: 20%;
     padding-bottom: 20px;
-    padding-top: 20px;
 }
 </style>
 	
